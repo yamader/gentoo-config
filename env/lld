@@ -1,0 +1,2 @@
+LDFLAGS="${LDFLAGS} -fuse-ld=lld"
+LD="ld.lld"
