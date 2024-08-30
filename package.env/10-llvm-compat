@@ -7,7 +7,7 @@ sys-devel/gcc cc # gdc
 <sys-libs/libnvidia-container-1.15 cc bfd # clang-19: unknown argument: '-fplan9-extensions'; mold-2.32: unknown command line option: -d; lld-19: symbol not defined: 'NVC_1.0'
 
 <dev-libs/darts-0.33            libstdcxx # libcxx-19: no member named 'random_shuffle' in namespace 'std'
-<mail-client/thunderbird-115.14 libstdcxx # linker: undefined symbol: std::__1::*
+<mail-client/thunderbird-116    libstdcxx # linker: undefined symbol: std::__1::*
 <media-sound/easyeffects-7.2    libstdcxx # libcxx-19: no member named 'par_unseq' in namespace 'std::execution'
 sys-process/btop                libstdcxx # segv: https://github.com/aristocratos/btop/issues/619
 

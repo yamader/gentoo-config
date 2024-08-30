@@ -8,3 +8,4 @@ sys-kernel/linux-firmware       nobinpkg
 virtual/*                       nobinpkg
 www-client/google-chrome*       nobinpkg
 x11-drivers/nvidia-drivers      nobinpkg
+yamad/*                         nobinpkg
