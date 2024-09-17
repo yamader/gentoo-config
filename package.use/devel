@@ -1,5 +1,6 @@
 */gcc -lto -pgo # save the time
 */rust* rust-src rustfmt
+dev-debug/gdb multitarget
 dev-embedded/esp-idf riscv32
 dev-lang/dmd static-libs tools
 dev-lang/ldc2 static-libs ABI_X86: 32
@@ -10,5 +11,4 @@ net-libs/nodejs corepack npm
 sys-apps/portage gentoo-dev
 sys-devel/clang LLVM_TARGETS: Xtensa
 sys-devel/gcc d
-sys-devel/gdb multitarget
 sys-devel/llvm LLVM_TARGETS: Xtensa
