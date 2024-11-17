@@ -1,4 +1,5 @@
 */* mold undef-v
+*/*::dlang mold-dc # ldc2: Unknown command line argument '-fuse-ld=mold'
 
 <dev-libs/libffi-3.5            lld # /usr/lib64/libffi.so.8: no version information available
 <gui-libs/gtk-4.15              lld # mold-2.32: does not support `-b binary`

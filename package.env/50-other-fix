@@ -1,5 +1,4 @@
 */*::crossdev march-generic
-*/*::dlang dc # ldc2: Unknown command line argument '-fuse-ld=mold'
 
 net-fs/samba    nodistcc
 sys-libs/ldb    nodistcc
