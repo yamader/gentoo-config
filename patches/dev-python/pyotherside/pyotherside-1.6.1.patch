@@ -1,0 +1,18 @@
+--- a/src/global_libpython_loader.cpp
++++ b/src/global_libpython_loader.cpp
+@@ -23,11 +23,11 @@
+ #if defined(__linux__) && !defined(ANDROID)
+ 
+ #define _GNU_SOURCE
+-#include <link.h>
++#include <clink>
+ 
+-#include <dlfcn.h>
+-#include <stdio.h>
+-#include <string.h>
++#include <cdlfcn>
++#include <cstdio>
++#include <cstring>
+ 
+ static int load_python_globally_callback(struct dl_phdr_info *info, size_t size, void *data)
+ {

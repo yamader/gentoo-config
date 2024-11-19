@@ -9,10 +9,10 @@ sys-devel/gcc cc # gdc
 <dev-libs/darts-0.33            libstdcxx # libcxx-19: no member named 'random_shuffle' in namespace 'std'
 <mail-client/thunderbird-116    libstdcxx # linker: undefined symbol: std::__1::*
 <media-sound/easyeffects-7.2    libstdcxx # libcxx-19: no member named 'par_unseq' in namespace 'std::execution'
-sys-process/btop                libstdcxx # segv: https://github.com/aristocratos/btop/issues/619
+sys-process/btop                cc # segv: https://github.com/aristocratos/btop/issues/619, compile error with clang/libcxx-20
 
 <dev-java/openjdk-22            vanilla # lld: recompile with -fPIC; cc: clang compiler is required
-<sys-apps/fwupd-efi-1.7         vanilla # llvm-objcopy-19: error: invalid output format: 'efi-app-x86_64'
+<sys-apps/fwupd-efi-1.8         vanilla # lld-20: -shared and -pie may not be used together
 <sys-firmware/seabios-1.17      vanilla # mold, lld-19, clang-19, llvm-objdump-19 incompat
 
 app-emulation/qemu      crt-static-compat
