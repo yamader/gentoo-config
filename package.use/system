@@ -1,3 +1,8 @@
+*/* LUA_SINGLE_TARGET: -* luajit
+*/* LUA_TARGETS: luajit
+*/* PYTHON_TARGETS: python3_14t python3_13
+*/* RUBY_TARGETS: ruby33
+
 media-video/pipewire pipewire-alsa sound-server
 net-misc/networkmanager iwd
 sys-apps/fwupd logitech nvme synaptics tpm uefi
