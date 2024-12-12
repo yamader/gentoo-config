@@ -9,8 +9,8 @@ dev-lang/ldc2 static-libs ABI_X86: 32
 dev-lang/php cgi cli exif ffi fpm mysqli postgres sqlite threads zip
 dev-lang/rust LLVM_TARGETS: AArch64 WebAssembly
 dev-lang/rust rust-analyzer wasm
+llvm-core/clang LLVM_TARGETS: Xtensa
+llvm-core/llvm LLVM_TARGETS: Xtensa
 net-libs/nodejs corepack npm
 sys-apps/portage gentoo-dev
-sys-devel/clang LLVM_TARGETS: Xtensa
 sys-devel/gcc d
-sys-devel/llvm LLVM_TARGETS: Xtensa
