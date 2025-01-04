@@ -1,8 +1,9 @@
 */* LUA_SINGLE_TARGET: -* luajit
 */* LUA_TARGETS: luajit
-*/* PYTHON_TARGETS: python3_14t python3_13
-*/* RUBY_TARGETS: ruby33
+*/* PYTHON_TARGETS: python3_14t python3_13t
+*/* RUBY_TARGETS: ruby34 ruby33
 
+llvm-core/clang-runtime sanitize # pgo
 llvm-core/llvm binutils-plugin # spidermonkey-115: LLVMgold.so: No such file or directory
 media-video/pipewire pipewire-alsa sound-server
 net-misc/networkmanager iwd
