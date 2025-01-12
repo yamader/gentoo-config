@@ -1,3 +1,4 @@
+<dev-lang/gforth-0.7.4          wnoe-clang16 # [-Wincompatible-function-pointer-types]
 <dev-lang/gnucobol-3.3          wnoe-clang16 # [-Wimplicit-function-declaration]
 <dev-libs/libtsm-4.1            wnoe-clang16 # [-Wimplicit-function-declaration]
 <dev-lisp/clisp-2.50            wnoe-clang16 # [-Wincompatible-function-pointer-types]
