@@ -1,0 +1,11 @@
+--- a/src/3rdparty/fmt/core.h
++++ b/src/3rdparty/fmt/core.h
+@@ -230,7 +230,7 @@
+        (!FMT_MSC_VERSION || FMT_MSC_VERSION >= 1929))
+ // consteval is broken in MSVC before VS2019 version 16.10 and Apple clang
+ // before 14.
+-#    define FMT_CONSTEVAL consteval
++#    define FMT_CONSTEVAL constexpr
+ #    define FMT_HAS_CONSTEVAL
+ #  else
+ #    define FMT_CONSTEVAL
