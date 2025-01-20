@@ -1,9 +1,12 @@
-*/* DLANG_SINGLE_TARGET: ldc2-1_39
 */gcc -lto -pgo # save the time
 */rust* rust-src rustfmt
+
+*/* DLANG_SINGLE_TARGET: ldc2-1_40
+dev-lang/dmd -selfhost DLANG_SINGLE_TARGET: ldc2-1_39
+dev-lang/ldc2:1.39 DLANG_SINGLE_TARGET: ldc2-1_39
+
 dev-debug/gdb multitarget
 dev-embedded/esp-idf riscv32
-dev-lang/dmd -selfhost
 dev-lang/dmd static-libs tools
 dev-lang/ldc2 static-libs ABI_X86: 32
 dev-lang/php cgi cli exif ffi fpm mysqli postgres sqlite threads zip

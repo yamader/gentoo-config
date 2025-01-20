@@ -1,4 +1,3 @@
-*/* LUA_SINGLE_TARGET: -* luajit
 */* LUA_TARGETS: luajit
 */* PYTHON_TARGETS: python3_14t python3_13t
 */* RUBY_TARGETS: ruby34 ruby33
