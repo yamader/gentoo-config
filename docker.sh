@@ -13,6 +13,8 @@ function pull {
   local tags=(`docker images --format '{{.Tag}}' "$image"`)
   [[ " ${tags[@]} " =~ " $tag " ]] && return
 
+  docker rmi $(docker images -q $image) || true
+
   local stage3=`dirname "$source"`/"$basename"
   docker import "$stage3" "$image:$tag"
 }
