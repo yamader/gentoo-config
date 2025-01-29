@@ -18,11 +18,6 @@ sys-process/btop                cc # segv: https://github.com/aristocratos/btop/
 <mail-client/thunderbird-116    libstdcxx # linker: undefined symbol: std::__1::*
 media-sound/easyeffects         libstdcxx # libcxx-20: no member named 'par_unseq' in namespace 'std::execution'
 
-# compiler-rt incompat
-app-emulation/qemu      crt-static-compat
-sys-apps/busybox        crt-static-compat
-sys-process/tini        crt-static-compat
-
 # temp
 net-libs/webkit-gtk clang-19 # clang-20.0.0git32f7f001+libcxx: no matching function for call to 'enumName'
 sci-libs/gsl clang-19 # clang-20.0.0git32f7f001+libcxx: clang frontend command failed with exit code 134
