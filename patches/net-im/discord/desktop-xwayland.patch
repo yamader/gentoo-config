@@ -1,0 +1,11 @@
+--- a/discord.desktop
++++ b/discord.desktop
+@@ -3,7 +3,7 @@
+ StartupWMClass=discord
+ Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+ GenericName=Internet Messenger
+-Exec=/usr/share/discord/Discord
++Exec=env XDG_SESSION_TYPE=x11 /usr/bin/discord
+ Icon=discord
+ Type=Application
+ Categories=Network;InstantMessaging;
