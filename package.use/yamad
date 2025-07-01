@@ -13,6 +13,7 @@ dev-libs/nss utils
 dev-util/stylua lua52 lua53 lua54 luau
 gnome-base/gvfs mtp
 gui-apps/waybar experimental network tray wifi
+gui-wm/dwl savedconfig
 media-fonts/noto-emoji icons
 sys-apps/busybox -pam static
 sys-apps/util-linux tty-helpers
