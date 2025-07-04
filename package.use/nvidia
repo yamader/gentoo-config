@@ -1,3 +1,2 @@
 */* LLVM_TARGETS: NVPTX
 media-video/ffmpeg nvenc
-x11-drivers/nvidia-drivers ABI_X86: 32
