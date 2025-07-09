@@ -6,7 +6,7 @@ llvm-core/clang-runtime sanitize # pgo
 llvm-core/llvm binutils-plugin # spidermonkey-115: LLVMgold.so: No such file or directory
 media-video/pipewire pipewire-alsa sound-server
 net-misc/networkmanager iwd
-sys-apps/fwupd logitech nvme synaptics tpm uefi
+sys-apps/fwupd logitech nvme synaptics uefi
 sys-apps/openrc sysv-utils -sysvinit
 sys-auth/pambase -passwdqc
 sys-boot/grub GRUB_PLATFORMS: efi-64 # ieee1275 uboot
