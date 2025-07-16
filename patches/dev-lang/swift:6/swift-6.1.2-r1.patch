@@ -1,0 +1,8 @@
+--- a/llvm-project/lldb/include/lldb/Utility/AddressableBits.h
++++ b/llvm-project/lldb/include/lldb/Utility/AddressableBits.h
+@@ -0,0 +1 @@
++#include <cstdint>
+--- a/llvm-project/llvm/utils/unittest/googletest/src/gtest-death-test.cc
++++ b/llvm-project/llvm/utils/unittest/googletest/src/gtest-death-test.cc
+@@ -0,0 +1 @@
++#include <cstdint>

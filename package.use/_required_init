@@ -1,0 +1,6 @@
+dev-libs/icu abi_x86_32
+dev-libs/libedit abi_x86_32
+dev-libs/libpcre -readline
+dev-libs/libpcre2 -readline
+dev-util/perf libpfm
+sys-libs/gpm abi_x86_32
