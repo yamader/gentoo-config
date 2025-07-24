@@ -1,0 +1,22 @@
+--- a/src/Text/Mustache/Compile.hs
++++ b/src/Text/Mustache/Compile.hs
+@@ -22,7 +22,7 @@
+ import           Control.Monad.State
+ import           Data.Bool
+ import           Data.HashMap.Strict        as HM
+-import           Data.Text                  hiding (concat, find, map, uncons)
++import           Data.Text                  hiding (concat, find, map, show, uncons)
+ import qualified Data.Text.IO               as TIO
+ import           Language.Haskell.TH        (Exp, Loc, Q, loc_filename,
+                                              loc_start, location)
+--- a/src/Text/Mustache/Internal/Types.hs
++++ b/src/Text/Mustache/Internal/Types.hs
+@@ -23,7 +23,7 @@
+ import           Data.Scientific
+ import qualified Data.Sequence            as Seq
+ import qualified Data.Set                 as Set
+-import           Data.Text
++import           Data.Text                hiding (show)
+ import qualified Data.Text.Lazy           as LT
+ import qualified Data.Vector              as V
+ import           Data.Word                (Word8, Word16, Word32, Word64)

@@ -1,0 +1,4 @@
+--- a/pillow_heif/_pillow_heif.c
++++ b/pillow_heif/_pillow_heif.c
+@@ -0,0 +1 @@
++#include <libheif/heif_properties.h>

@@ -1,2 +1,3 @@
+dev-haskell/text -simdutf # linked with libc++ but libstdc++ symbol wtf
 dev-java/openjdk -lto # gcc-15 lto leak
 xfce-base/tumbler -raw # libopenraw has broken

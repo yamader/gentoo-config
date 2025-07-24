@@ -1,0 +1,4 @@
+--- a/src/ccache/core/exceptions.hpp
++++ b/src/ccache/core/exceptions.hpp
+@@ -0,0 +1 @@
++#include <cstdlib>

@@ -1,0 +1,8 @@
+--- a/lib/libimhex/include/hex/helpers/http_requests_native.hpp
++++ b/lib/libimhex/include/hex/helpers/http_requests_native.hpp
+@@ -0,0 +1 @@
++#include <mutex>
+--- a/main/gui/source/messaging/linux.cpp
++++ b/main/gui/source/messaging/linux.cpp
+@@ -0,0 +1 @@
++#include <unistd.h>

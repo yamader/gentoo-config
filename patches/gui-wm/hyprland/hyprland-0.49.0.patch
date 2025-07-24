@@ -1,0 +1,4 @@
+--- a/hyprpm/src/helpers/Sys.cpp
++++ b/hyprpm/src/helpers/Sys.cpp
+@@ -0,0 +1 @@
++#include <sstream>

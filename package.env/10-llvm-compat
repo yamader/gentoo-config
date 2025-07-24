@@ -21,5 +21,5 @@ media-sound/easyeffects         libstdcxx # libcxx-20: no member named 'par_unse
 # temp
 net-libs/webkit-gtk clang-19 # clang-20.0.0git32f7f001+libcxx: no matching function for call to 'enumName'
 sci-libs/gsl clang-19 # clang-20.0.0git32f7f001+libcxx: clang frontend command failed with exit code 134
-sci-mathematics/lean cc # https://bugs.gentoo.org/946977
+sci-mathematics/lean gcc # https://bugs.gentoo.org/946977
 www-client/firefox # libcxx-19
