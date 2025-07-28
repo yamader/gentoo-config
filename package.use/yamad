@@ -15,6 +15,7 @@ gnome-base/gvfs mtp
 gui-apps/waybar experimental network tray wifi
 gui-wm/dwl savedconfig
 media-fonts/noto-emoji icons
+media-sound/easyeffects -doc # omit webkit-gtk deps
 sys-apps/busybox -pam static
 sys-apps/util-linux tty-helpers
 virtual/wine proton

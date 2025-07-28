@@ -1,0 +1,2 @@
+CXXFLAGS="${CXXFLAGS} \
+	-Wno-error=invalid-specialization"

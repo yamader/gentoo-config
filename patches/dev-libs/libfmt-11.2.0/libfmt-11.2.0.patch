@@ -1,0 +1,4 @@
+--- a/include/fmt/format.h
++++ b/include/fmt/format.h
+@@ -47,0 +1 @@
++#  include <cstdlib>  // malloc/free

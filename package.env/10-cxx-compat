@@ -1,1 +1,6 @@
 <games-util/xboxdrv-0.9 cxx14 # std::auto_ptr
+
+# libcxx incompat
+<dev-libs/darts-0.33            libstdcxx # libcxx-20: no member named 'random_shuffle' in namespace 'std'
+<mail-client/thunderbird-116    libstdcxx # linker: undefined symbol: std::__1::*
+media-sound/easyeffects         explib # libcxx-20: no member named 'par_unseq' in namespace 'std::execution'

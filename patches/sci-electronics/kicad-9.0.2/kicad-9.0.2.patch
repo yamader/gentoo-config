@@ -1,0 +1,4 @@
+--- a/thirdparty/fmt/include/fmt/format.h
++++ b/thirdparty/fmt/include/fmt/format.h
+@@ -0,0 +1 @@
++#include <cstdlib>
