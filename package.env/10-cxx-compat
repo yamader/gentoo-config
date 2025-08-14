@@ -3,4 +3,5 @@
 # libcxx incompat
 <dev-libs/darts-0.33            libstdcxx # libcxx-20: no member named 'random_shuffle' in namespace 'std'
 <mail-client/thunderbird-116    libstdcxx # linker: undefined symbol: std::__1::*
+dev-debug/systemtap             gcc # <ext/stdio_filebuf.h> file not found; expected namespace name __gnu_cxx; case value is not a constant expression
 media-sound/easyeffects         explib # libcxx-20: no member named 'par_unseq' in namespace 'std::execution'
