@@ -1,0 +1,14 @@
++++ a/src/libcmd/network-proxy.cc
+--- b/src/libcmd/network-proxy.cc
+@@ -0,0 +1 @@
++#include <iterator>
+
++++ a/src/libstore/gc.cc
+--- b/src/libstore/gc.cc
+@@ -0,0 +1 @@
++#include <thread>
+
+--- a/src/libutil/hilite.cc
++++ b/src/libutil/hilite.cc
+@@ -0,0 +1 @@
++#include <algorithm>
