@@ -1,3 +1,7 @@
+--- a/lib/external/libromfs/lib/include/romfs/romfs.hpp
++++ b/lib/external/libromfs/lib/include/romfs/romfs.hpp
+@@ -0,0 +1 @@
++#include <type_traits>
 --- a/lib/libimhex/include/hex/helpers/http_requests_native.hpp
 +++ b/lib/libimhex/include/hex/helpers/http_requests_native.hpp
 @@ -0,0 +1 @@
