@@ -3,6 +3,7 @@ acct-*/*                        nobinpkg
 app-editors/vscode              nobinpkg
 dev-util/nvidia-cuda-toolkit    nobinpkg
 media-sound/spotify             nobinpkg
+sci-electronics/kicad-packages3d nobinpkg
 sys-kernel/*-sources            nobinpkg
 sys-kernel/linux-firmware       nobinpkg
 virtual/*                       nobinpkg
