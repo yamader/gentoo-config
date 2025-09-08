@@ -2,7 +2,6 @@
 */* PYTHON_TARGETS: python3_15t python3_14t
 */* RUBY_TARGETS: ruby34
 
-llvm-core/clang-runtime sanitize # pgo
 llvm-core/llvm binutils-plugin # spidermonkey-115: LLVMgold.so: No such file or directory
 media-video/pipewire pipewire-alsa sound-server
 net-misc/networkmanager iwd
