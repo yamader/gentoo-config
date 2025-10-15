@@ -10,3 +10,53 @@
 +++ b/main/gui/source/messaging/linux.cpp
 @@ -0,0 +1 @@
 +#include <unistd.h>
+--- a/plugins/disassembler/include/content/helpers/disassembler.hpp
++++ b/plugins/disassembler/include/content/helpers/disassembler.hpp
+@@ -13,12 +13,12 @@
+     enum class BuiltinArchitecture : i32
+     {
+         ARM         = CS_ARCH_ARM,
+-        ARM64       = CS_ARCH_ARM64,
++        ARM64       = CS_ARCH_AARCH64,
+         MIPS        = CS_ARCH_MIPS,
+         X86         = CS_ARCH_X86,
+         PPC         = CS_ARCH_PPC,
+         SPARC       = CS_ARCH_SPARC,
+-        SYSZ        = CS_ARCH_SYSZ,
++        SYSZ        = CS_ARCH_SYSTEMZ,
+         XCORE       = CS_ARCH_XCORE,
+         M68K        = CS_ARCH_M68K,
+         TMS320C64X  = CS_ARCH_TMS320C64X,
+@@ -54,12 +54,12 @@
+             std::array<const char *, static_cast<u32>(BuiltinArchitecture::MAX) + 1> names = { };
+ 
+             names[CS_ARCH_ARM]          = "ARM";
+-            names[CS_ARCH_ARM64]        = "AArch64";
++            names[CS_ARCH_AARCH64]      = "AArch64";
+             names[CS_ARCH_MIPS]         = "MIPS";
+             names[CS_ARCH_X86]          = "Intel x86";
+             names[CS_ARCH_PPC]          = "PowerPC";
+             names[CS_ARCH_SPARC]        = "SPARC";
+-            names[CS_ARCH_SYSZ]         = "SystemZ";
++            names[CS_ARCH_SYSTEMZ]      = "SystemZ";
+             names[CS_ARCH_XCORE]        = "XCore";
+             names[CS_ARCH_M68K]         = "Motorola 68K";
+             names[CS_ARCH_TMS320C64X]   = "TMS320C64x";
+@@ -129,7 +129,7 @@
+                 mode |= CS_MODE_THUMB;
+             }
+             else if (equalsIgnoreCase(archName, "aarch64") || equalsIgnoreCase(archName, "arm64"))
+-                arch = CS_ARCH_ARM64;
++                arch = CS_ARCH_AARCH64;
+             else if (equalsIgnoreCase(archName, "mips"))
+                 arch = CS_ARCH_MIPS;
+             else if (equalsIgnoreCase(archName, "x86"))
+@@ -143,7 +143,7 @@
+             else if (equalsIgnoreCase(archName, "sparc"))
+                 arch = CS_ARCH_SPARC;
+             else if (equalsIgnoreCase(archName, "sysz"))
+-                arch = CS_ARCH_SYSZ;
++                arch = CS_ARCH_SYSTEMZ;
+             else if (equalsIgnoreCase(archName, "xcore"))
+                 arch = CS_ARCH_XCORE;
+             else if (equalsIgnoreCase(archName, "m68k"))
