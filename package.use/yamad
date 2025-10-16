@@ -15,6 +15,7 @@ gnome-base/gvfs mtp
 gui-apps/waybar experimental network tray wifi
 gui-apps/xremap wlroots
 gui-wm/dwl savedconfig
+gui-wm/wayfire -dbus
 media-fonts/noto-emoji icons
 media-sound/easyeffects -doc # omit webkit-gtk deps
 sys-apps/busybox -pam static
