@@ -1,0 +1,33 @@
+--- a/backend/drm/drm.c
++++ b/backend/drm/drm.c
+@@ -1136,7 +1136,7 @@
+ 			struct wlr_drm_format format = {0};
+ 			// Try to find a common format/modifier
+ 			if (!drm_plane_pick_render_format(plane, &format, &drm->mgpu_renderer)) {
+-				wlr_log(WLR_ERROR, "Failed to pick cursor plane format");
++				wlr_log(WLR_DEBUG, "Failed to pick cursor plane format");
+ 				// If the above failed it may be because the modifier for this
+ 				// buffer is not able to be scanned out, as is the case on some
+ 				// GPUs.  If it failed try to do a linear copy. This will map
+--- a/backend/drm/renderer.c
++++ b/backend/drm/renderer.c
+@@ -195,7 +195,7 @@
+ 	};
+ 	struct wlr_render_pass *pass = wlr_renderer_begin_buffer_pass(renderer, dst, &pass_options);
+ 	if (pass == NULL) {
+-		wlr_log(WLR_ERROR, "Failed to begin render pass with multi-GPU destination buffer");
++		wlr_log(WLR_DEBUG, "Failed to begin render pass with multi-GPU destination buffer");
+ 		goto error_dst;
+ 	}
+ 
+--- a/render/gles2/renderer.c
++++ b/render/gles2/renderer.c
+@@ -85,7 +85,7 @@
+ 
+ GLuint gles2_buffer_get_fbo(struct wlr_gles2_buffer *buffer) {
+ 	if (buffer->external_only) {
+-		wlr_log(WLR_ERROR, "DMA-BUF format is external-only");
++		wlr_log(WLR_DEBUG, "DMA-BUF format is external-only");
+ 		return 0;
+ 	}
+ 
