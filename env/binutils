@@ -1,0 +1,12 @@
+# cf. gentoo:features/llvm/make.defaults
+AR=""
+AS=""
+CPP=""
+NM=""
+STRIP=""
+RANLIB=""
+OBJCOPY=""
+STRINGS=""
+OBJDUMP=""
+READELF=""
+ADDR2LINE=""

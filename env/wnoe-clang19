@@ -1,3 +1,0 @@
-CXXFLAGS="${CXXFLAGS} \
-	-Wno-error=c++11-narrowing \
-	-Wno-error=missing-template-arg-list-after-template-kw"

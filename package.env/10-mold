@@ -1,0 +1,10 @@
+*/* mold undef-v
+
+<sys-boot/gnu-efi-4.1             lld # mold-2.40: unknown linker script token: OUTPUT_ARCH(i386:x86-64)
+<sys-boot/refind-0.15             lld # mold-2.40: unknown linker script token: OUTPUT_ARCH(i386:x86-64)
+sci-libs/blas-lapack-aux-wrapper  lld # mold-2.40: error: --defsym: undefined symbol: 0
+sys-kernel/*                      lld # mold: unknown linker
+x11-drivers/nvidia-drivers        lld # mold-2.40: does not support `-b binary`.
+
+<sys-devel/gcc-12                 vanilla-ldflags # xgcc: unrecognized command-line option '-fuse-ld=mold'
+dev-lang/swift                    vanilla-ldflags # lld: error: unknown argument '-fuse-ld=mold'

@@ -1,0 +1,24 @@
+*/*::crossdev vanilla
+sys-devel/gcc gcc # gdc
+
+# clang incompat
+<dev-debug/systemtap-5.4  gcc # stapbpf: case value is not a constant expression
+<dev-lang/gnu-apl-1.9     gcc # clang-22: invalid operands to binary expression
+<dev-lisp/clisp-2.50      gcc # clang-22: src/compiler.lisp: LIST-INIT-START: start index 44801 too large for
+dev-cpp/highway           clang-stable # always_inline function * requires target feature 'avx512f', but would be inlined into function compiled without support for 'avx512f'
+net-libs/webkit-gtk       clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
+
+# clang error incompat
+<dev-lang/gforth-0.7.4      wnoe-clang16 # [-Wincompatible-function-pointer-types]
+<dev-lang/gnucobol-3.3      wnoe-clang16 # [-Wimplicit-function-declaration]
+<x11-libs/fox-1.7           wnoe-clang16 # [-Wregister]
+<sci-electronics/ngspice-44 wnoe-clang20 # [-Winvalid-specialization]
+
+# libcxx incompat
+<dev-libs/darts-0.33  libstdcxx # libcxx-22: no member named 'random_shuffle' in namespace 'std'
+sys-process/btop      libstdcxx # segv: https://github.com/aristocratos/btop/issues/619
+
+# other incompat
+<sys-libs/libnvidia-container-1.18  bfd # lld-22: undefined symbol: main
+<sys-apps/fwupd-efi-1.9             binutils # llvm-objcopy-22: invalid output format: 'efi-app-x86_64'
+<sys-firmware/seabios-1.17          binutils # ./scripts/layoutrom.py out/code16.o.objdump: KeyError: '.text.call32_prep'
