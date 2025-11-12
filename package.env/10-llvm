@@ -24,5 +24,5 @@ sys-process/btop      libstdcxx # segv: https://github.com/aristocratos/btop/iss
 
 # other incompat
 <sys-libs/libnvidia-container-1.18  bfd # lld-22: undefined symbol: main
-<sys-apps/fwupd-efi-1.9             binutils # llvm-objcopy-22: invalid output format: 'efi-app-x86_64'
+<sys-apps/fwupd-efi-1.9             binutils lld # llvm-objcopy-22: invalid output format: 'efi-app-x86_64'; mold: unknown linker script token: OUTPUT_ARCH(i386:x86-64)
 <sys-firmware/seabios-1.17          binutils # ./scripts/layoutrom.py out/code16.o.objdump: KeyError: '.text.call32_prep'
