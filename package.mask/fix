@@ -1,2 +1,1 @@
->=dev-ml/ppxlib-0.34.0 # for dev-ml/tyxml of dev-ml/odoc
 >=dev-ml/cmdliner-2.0.0 # for opam and opam-installer
