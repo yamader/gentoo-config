@@ -1,0 +1,11 @@
+--- a/llvm/tools/sancov/sancov.cpp
++++ b/llvm/tools/sancov/sancov.cpp
+@@ -505,7 +505,7 @@
+   static std::unique_ptr<SpecialCaseList> createUserIgnorelist() {
+     if (ClIgnorelist.empty())
+       return std::unique_ptr<SpecialCaseList>();
+-    return SpecialCaseList::createOrDie({{ClIgnorelist}},
++    return SpecialCaseList::createOrDie({ClIgnorelist},
+                                         *vfs::getRealFileSystem());
+   }
+   std::unique_ptr<SpecialCaseList> DefaultIgnorelist;
