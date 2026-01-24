@@ -7,6 +7,7 @@ echo?() {
 }
 
 exec docker run -it \
+	-v "$(pwd)"/binpkgs:/var/cache/binpkgs \
 	-v "$(pwd)":/etc/portage \
 	-v /tmp:/tmp \
 	-v /var/cache/distfiles:/var/cache/distfiles \
