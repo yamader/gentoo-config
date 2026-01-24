@@ -2,6 +2,7 @@
 <sys-devel/gcc-16.0.9999:16 **
 
 # llvm binaries
+<dev-util/spirv-llvm-translator-23.0.0.9999 ** # for libclc
 <llvm-core/clang-23.0.0.9999 **
 <llvm-core/clang-common-23.0.0.9999 **
 <llvm-core/flang-23.0.0.9999 **
@@ -23,8 +24,8 @@
 <llvm-runtimes/openmp-23.0.0.9999 **
 
 # llvm misc binaries
-~llvm-core/llvmgold-23 **
-~llvm-runtimes/libatomic-stub-0 **
+llvm-core/llvmgold **
+llvm-runtimes/libatomic-stub **
 
 # llvm configs
 llvm-core/clang-linker-config **
