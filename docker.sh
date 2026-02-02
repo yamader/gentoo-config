@@ -6,9 +6,15 @@ echo?() {
 	$1 >/dev/null 2>&1 && echo "${@:2}"
 }
 
+profile="$(pwd)":/etc/portage
+if [ "${1-}" = '-r' ]; then
+	profile="$(pwd)"/repos.conf:/etc/portage/repos.conf
+	shift
+fi
+
 exec docker run -it \
 	-v "$(pwd)"/binpkgs:/var/cache/binpkgs \
-	-v "$(pwd)":/etc/portage \
+	-v "$profile" \
 	-v /tmp:/tmp \
 	-v /var/cache/distfiles:/var/cache/distfiles \
 	-v /var/cache/edb:/var/cache/edb \
