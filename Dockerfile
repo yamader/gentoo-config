@@ -12,12 +12,25 @@ RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache
 		+    return SpecialCaseList::createOrDie({ClIgnorelist},
 	EOF
 	USE=mrustc-bootstrap emerge -1j dev-lang/rust:1.74.1
-	emerge -j dev-lang/rust
-	emerge -c
-	emerge -W dev-lang/rust
+	emerge -1j dev-lang/rust:1.86.0
+	emerge -cX dev-lang/rust:1.86.0
+
+	USE=d emerge -1j sys-devel/gcc:11
 EOS
-RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage \
-	USE=d CC=gcc CXX=g++ emerge -1j sys-devel/gcc
+RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage <<-EOS
+	wget -O- https://github.com/gentoo-mirror/guru/archive/master.tar.gz | tar xzC /var/db/repos
+	wget -O- https://github.com/gentoo/dlang/archive/master.tar.gz | tar xzC /var/db/repos
+	mkdir -p /etc/portage/repos.conf
+	cat > /etc/portage/repos.conf/bootstrap.conf <<-EOF
+		[guru]
+		location = /var/db/repos/guru-master
+		[dlang]
+		location = /var/db/repos/dlang-master
+	EOF
+
+	ACCEPT_KEYWORDS=~amd64 USE=dlang_single_target_gdc-14 emerge -1j dev-lang/ldc2
+	ACCEPT_KEYWORDS=~amd64 emerge -1j dev-lang/swift
+EOS
 
 # fix system
 RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage \
