@@ -7,7 +7,7 @@ sys-devel/gcc gcc # gdc
 <dev-lisp/clisp-2.50      gcc # clang-22: src/compiler.lisp: LIST-INIT-START: start index 44801 too large for
 app-office/libreoffice    clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
 dev-cpp/highway           clang-stable # always_inline function * requires target feature 'avx512f', but would be inlined into function compiled without support for 'avx512f'
-llvm-core/llvm:21         clang-stable # segv
+media-libs/libjxl         clang-stable # dev-cpp/highway
 net-libs/webkit-gtk       clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
 net-p2p/bitcoin-core      clang-stable # segv
 sys-boot/grub             clang-stable # clang-22: cannot link at address 0x2000
