@@ -2,5 +2,6 @@ CFLAGS="${CFLAGS} \
 	-Wno-error=implicit-function-declaration \
 	-Wno-error=implicit-int \
 	-Wno-error=incompatible-function-pointer-types \
+	-Wno-error=incompatible-pointer-types \
 	-Wno-error=int-conversion \
 	-Wno-error=register"

@@ -8,3 +8,9 @@ x11-drivers/nvidia-drivers        lld # mold-2.40: does not support `-b binary`.
 
 <sys-devel/gcc-12                 vanilla-ldflags # xgcc: unrecognized command-line option '-fuse-ld=mold'
 dev-lang/swift                    vanilla-ldflags # lld: error: unknown argument '-fuse-ld=mold'
+
+# https://github.com/rui314/mold/issues/1545
+sci-libs/flexiblas  lld
+sci-libs/lapack     lld
+sci-libs/openblas   lld
+sys-devel/gcc       lld

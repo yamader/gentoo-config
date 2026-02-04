@@ -2,8 +2,8 @@
 sys-devel/gcc gcc # gdc
 
 # clang incompat
-<dev-debug/systemtap-5.4  gcc # stapbpf: case value is not a constant expression
-<dev-lang/gnu-apl-1.9     gcc # clang-22: invalid operands to binary expression
+~dev-debug/systemtap-5.4  gcc # clang: <ext/stdio_filebuf.h> file not found
+<dev-lang/gnu-apl-1.9     gcc bfd # clang-23: invalid operands to binary expression; lld-23: *.o is incompatible with elf32-i386
 <dev-lisp/clisp-2.50      gcc # clang-22: src/compiler.lisp: LIST-INIT-START: start index 44801 too large for
 app-office/libreoffice    clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
 dev-cpp/highway           clang-stable # always_inline function * requires target feature 'avx512f', but would be inlined into function compiled without support for 'avx512f'
@@ -12,10 +12,12 @@ net-libs/webkit-gtk       clang-stable # skia: use of undeclared identifier '__b
 net-p2p/bitcoin-core      clang-stable # segv
 
 # clang error incompat
+app-crypt/chntpw            wnoe-clang16 # [-Wincompatible-pointer-types]; wtf 6 digits version number
+<app-misc/oneko-1.3         wnoe-clang16 # [-Wincompatible-pointer-types]
 <dev-lang/gforth-0.7.4      wnoe-clang16 # [-Wincompatible-function-pointer-types]
 <dev-lang/gnucobol-3.3      wnoe-clang16 # [-Wimplicit-function-declaration]
-<x11-libs/fox-1.7           wnoe-clang16 # [-Wregister]
 <sci-electronics/ngspice-44 wnoe-clang20 # [-Winvalid-specialization]
+<x11-libs/fox-1.7           wnoe-clang16 # [-Wregister]
 
 # libcxx incompat
 <dev-libs/darts-0.33  libstdcxx # libcxx-22: no member named 'random_shuffle' in namespace 'std'

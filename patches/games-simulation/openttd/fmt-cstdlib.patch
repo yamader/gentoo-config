@@ -1,0 +1,4 @@
+--- a/src/3rdparty/fmt/os.cc
++++ b/src/3rdparty/fmt/os.cc
+@@ -0,0 +1 @@
++#include <cstdlib>

@@ -1,0 +1,70 @@
+--- a/src/libstore/build/goal.cc
++++ b/src/libstore/build/goal.cc
+@@ -1,6 +1,7 @@
+ #include "nix/store/build/goal.hh"
+ #include "nix/store/build/worker.hh"
+ #include "nix/store/globals.hh"
++#include <tuple>
+ 
+ namespace nix {
+ 
+@@ -182,7 +183,7 @@
+                 /* If we failed and keepGoing is not set, we remove all
+                    remaining waitees. */
+                 for (auto & g : goal->waitees) {
+-                    g->waiters.extract(goal);
++                    std::ignore = g->waiters.extract(goal);
+                 }
+                 goal->waitees.clear();
+ 
+--- a/src/libstore/s3-binary-cache-store.cc
++++ b/src/libstore/s3-binary-cache-store.cc
+@@ -11,6 +11,7 @@
+ #include <ranges>
+ #include <regex>
+ #include <span>
++#include <tuple>
+ 
+ namespace nix {
+ 
+@@ -357,7 +358,7 @@
+         req.uri = VerbatimURL(url);
+         req.method = HttpMethod::Delete;
+ 
+-        getFileTransfer()->enqueueFileTransfer(req).get();
++        std::ignore = getFileTransfer()->enqueueFileTransfer(req).get();
+     } catch (...) {
+         ignoreExceptionInDestructor();
+     }
+@@ -390,7 +391,7 @@
+     req.data = {payload};
+     req.mimeType = "text/xml";
+ 
+-    getFileTransfer()->enqueueFileTransfer(req).get();
++    std::ignore = getFileTransfer()->enqueueFileTransfer(req).get();
+ 
+     debug("S3 multipart upload completed: %d parts uploaded for '%s'", partEtags.size(), key);
+ }
+--- a/src/libfetchers/git-utils.cc
++++ b/src/libfetchers/git-utils.cc
+@@ -42,9 +42,10 @@
+ #include <boost/unordered/unordered_flat_set.hpp>
+ #include <iostream>
+ #include <queue>
++#include <ranges>
+ #include <regex>
+ #include <span>
+-#include <ranges>
++#include <tuple>
+ 
+ namespace std {
+ 
+@@ -896,7 +897,7 @@
+ 
+             auto path2 = *parent;
+             path2.push(entryName);
+-            lookupCache.emplace(path2, std::move(copy)).first->second.get();
++            std::ignore = lookupCache.emplace(path2, std::move(copy)).first->second.get();
+         }
+ 
+         return res;
