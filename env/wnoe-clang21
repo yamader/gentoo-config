@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} \
+	-Wno-default-const-init-field-unsafe"
