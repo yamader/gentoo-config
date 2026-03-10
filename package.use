@@ -1,1 +1,4 @@
 sys-kernel/installkernel dracut grub
+
+# required
+net-firewall/iptables nftables
