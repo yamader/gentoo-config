@@ -6,6 +6,7 @@ app-alternatives/gzip pigz -reference
 app-crypt/freepg tools
 app-crypt/gnupg tools
 app-crypt/rnp doc
+app-editors/emacs -gui
 app-emulation/qemu -pin-upstream-blobs static-user spice usbredir virgl
 app-emulation/qemu QEMU_SOFTMMU_TARGETS: aarch64 arm ppc64
 app-emulation/qemu QEMU_USER_TARGETS: aarch64 arm ppc64
