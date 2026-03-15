@@ -1,0 +1,2 @@
+app-alternatives/gpg freepg -reference
+sys-kernel/installkernel dracut grub
