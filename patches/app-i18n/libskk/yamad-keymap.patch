@@ -1,0 +1,9 @@
+--- a/rules/default/rom-kana/default.json
++++ b/rules/default/rom-kana/default.json
+@@ -216,1 +216,1 @@
+-            "z,": ["", "‥" ],
++            "z,": ["", "、" ],
+@@ -246,3 +246,0 @@
+-            ":": ["", "：" ],
+-            ";": ["", "；" ],
+-            "?": ["", "？" ],
