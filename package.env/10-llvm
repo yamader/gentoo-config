@@ -19,12 +19,13 @@ app-crypt/chntpw            wnoe-clang16 # [-Wincompatible-pointer-types]; wtf 6
 <dev-ruby/nokogiri-1.20     wnoe-clang21 # [-Wdefault-const-init-field-unsafe]
 <sci-electronics/ngspice-44 wnoe-clang20 # [-Winvalid-specialization]
 <x11-libs/fox-1.7           wnoe-clang16 # [-Wregister]
+>=media-libs/virglrenderer-1.2.0 wnoe-clang16 # [-Wincompatible-pointer-types-discards-qualifiers]
 
 # libcxx incompat
 <dev-libs/darts-0.33  libstdcxx # libcxx-22: no member named 'random_shuffle' in namespace 'std'
 sys-process/btop      libstdcxx # segv: https://github.com/aristocratos/btop/issues/619
 
 # other incompat
-<sys-libs/libnvidia-container-1.18  bfd # lld-22: undefined symbol: main
+>=sys-libs/libnvidia-container-1.18.1 bfd # lld-23: undefined symbol: main
 <sys-apps/fwupd-efi-1.9             binutils lld # llvm-objcopy-22: invalid output format: 'efi-app-x86_64'; mold: unknown linker script token: OUTPUT_ARCH(i386:x86-64)
 <sys-firmware/seabios-1.17          binutils # ./scripts/layoutrom.py out/code16.o.objdump: KeyError: '.text.call32_prep'
