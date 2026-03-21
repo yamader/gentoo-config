@@ -2,6 +2,7 @@
 */* PYTHON_TARGETS: python3_15t python3_14t
 */* RUBY_TARGETS: ruby34
 
+app-emulation/wine-* -abi_x86_32 wow64
 dev-lang/python -bluetooth
 llvm-core/llvm binutils-plugin # spidermonkey-115: LLVMgold.so: No such file or directory
 llvm-runtimes/clang-runtime sanitize # fix PGO
@@ -15,6 +16,7 @@ sys-firmware/intel-microcode initramfs
 sys-kernel/cachyos-sources -bore eevdf llvm-lto-thin -llvm-lto-thin-dist
 sys-kernel/gentoo-kernel-bin modules-compress
 sys-kernel/installkernel dracut grub
+sys-kernel/linux-firmware compress-xz
 
 dev-util/ccache -static-c++
 gnome-base/gnome -extras
