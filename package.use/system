@@ -4,6 +4,7 @@
 
 dev-lang/python -bluetooth
 llvm-core/llvm binutils-plugin # spidermonkey-115: LLVMgold.so: No such file or directory
+llvm-runtimes/clang-runtime sanitize # fix PGO
 media-video/pipewire pipewire-alsa sound-server
 net-misc/networkmanager iwd
 sys-apps/fwupd logitech nvme synaptics uefi
