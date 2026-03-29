@@ -12,7 +12,7 @@ if [ "${1-}" = '-r' ]; then
 	shift
 fi
 
-exec docker run -it \
+exec docker run --rm -it \
 	-v "$(pwd)"/binpkgs:/var/cache/binpkgs \
 	-v "$profile" \
 	-v /tmp:/tmp \
