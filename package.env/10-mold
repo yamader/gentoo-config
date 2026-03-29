@@ -10,9 +10,12 @@ x11-drivers/nvidia-drivers        lld # mold-2.40: does not support `-b binary`.
 dev-lang/swift                    vanilla-ldflags # lld: error: unknown argument '-fuse-ld=mold'
 
 # https://github.com/rui314/mold/issues/1545
+dev-db/redis        lld
 dev-debug/systemtap lld
+dev-lang/ghc        lld
 sci-libs/flexiblas  lld
 sci-libs/lapack     lld
 sci-libs/openblas   lld
 sys-devel/gcc       lld
+sys-fs/bees         lld
 sys-libs/libnvidia-container lld

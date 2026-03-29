@@ -5,11 +5,12 @@ sys-devel/gcc gcc # gdc
 ~dev-debug/systemtap-5.4  gcc # clang: <ext/stdio_filebuf.h> file not found
 <dev-lang/gnu-apl-1.9     gcc bfd # clang-23: invalid operands to binary expression; lld-23: *.o is incompatible with elf32-i386
 <dev-lisp/clisp-2.50      gcc # clang-22: src/compiler.lisp: LIST-INIT-START: start index 44801 too large for
+>=sys-fs/bees-0.11        gcc # clang++-23: bits/fcntl-linux.h: openat2 is missing exception specification throw()
 app-office/libreoffice    clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
 dev-cpp/highway           clang-stable # always_inline function * requires target feature 'avx512f', but would be inlined into function compiled without support for 'avx512f'
+media-libs/gegl           clang-stable # ICE
 media-libs/libjxl         clang-stable # dev-cpp/highway
 net-libs/webkit-gtk       clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
-net-p2p/bitcoin-core      clang-stable # segv
 
 # clang error incompat
 app-crypt/chntpw            wnoe-clang16 # [-Wincompatible-pointer-types]; wtf 6 digits version number
@@ -19,7 +20,10 @@ app-crypt/chntpw            wnoe-clang16 # [-Wincompatible-pointer-types]; wtf 6
 <dev-ruby/nokogiri-1.20     wnoe-clang21 # [-Wdefault-const-init-field-unsafe]
 <sci-electronics/ngspice-44 wnoe-clang20 # [-Winvalid-specialization]
 <x11-libs/fox-1.7           wnoe-clang16 # [-Wregister]
+>=app-containers/lxc-6.0.6  wnoe-clang16 # [-Wincompatible-pointer-types-discards-qualifiers]
+>=media-gfx/imagemagick-7.1.2.10 wnoe-clang16 # [-Wincompatible-function-pointer-types]
 >=media-libs/virglrenderer-1.2.0 wnoe-clang16 # [-Wincompatible-pointer-types-discards-qualifiers]
+>=sys-fs/lxcfs-6.0.6        wnoe-clang16 # [-Wincompatible-pointer-types-discards-qualifiers]
 
 # libcxx incompat
 <dev-libs/darts-0.33  libstdcxx # libcxx-22: no member named 'random_shuffle' in namespace 'std'
@@ -29,3 +33,5 @@ sys-process/btop      libstdcxx # segv: https://github.com/aristocratos/btop/iss
 >=sys-libs/libnvidia-container-1.18.1 bfd # lld-23: undefined symbol: main
 <sys-apps/fwupd-efi-1.9             binutils lld # llvm-objcopy-22: invalid output format: 'efi-app-x86_64'; mold: unknown linker script token: OUTPUT_ARCH(i386:x86-64)
 <sys-firmware/seabios-1.17          binutils # ./scripts/layoutrom.py out/code16.o.objdump: KeyError: '.text.call32_prep'
+dev-lang/ghc ghc # require C23
+sys-apps/memtest86+ bfd # lld-23: unknown argument '--warn-constructors'
