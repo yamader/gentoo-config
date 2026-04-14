@@ -1,0 +1,15 @@
+*/* PERL_FEATURES: ithreads
+
+# REQUIRED_USE
+app-containers/docker-credential-helpers keyring # any-of ( keyring pass )
+dev-lang/php -readline # cli? ( exactly-one-of ( readline libedit ) )
+dev-libs/libpcre -readline # readline? ( !libedit ) libedit? ( !readline )
+dev-libs/libpcre2 -readline # at-most-one-of ( libedit readline )
+media-video/pipewire extra # ffmpeg? ( extra )
+net-analyzer/wireshark LUA_SINGLE_TARGET: lua5-4 # lua? ( exactly-one-of ( lua_single_target_lua5-3 lua_single_target_lua5-4 ) )
+net-dns/dnsmasq script # lua? ( script )
+net-firewall/nftables -readline # libedit? ( !readline )
+sys-apps/fwupd gnutls # uefi? ( gnutls )
+
+# other
+x11-libs/wxGTK gstreamer
