@@ -12,11 +12,11 @@ RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache
 		+    return SpecialCaseList::createOrDie({ClIgnorelist},
 	EOF
 	USE=mrustc-bootstrap emerge -1j dev-lang/rust:1.74.1
-	emerge -1j dev-lang/rust:1.86.0
-	emerge -cX dev-lang/rust:1.86.0
-
-	USE=d emerge -1j sys-devel/gcc:11
+	emerge -1j dev-lang/rust:1.93.1
+	emerge -cX dev-lang/rust:{1.86.0,1.93.1}
 EOS
+RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage \
+	USE=d emerge -1j sys-devel/gcc:11
 RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage <<-EOS
 	wget -O- https://github.com/gentoo-mirror/guru/archive/master.tar.gz | tar xzC /var/db/repos
 	wget -O- https://github.com/gentoo/dlang/archive/master.tar.gz | tar xzC /var/db/repos
@@ -27,10 +27,10 @@ RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache
 		[dlang]
 		location = /var/db/repos/dlang-master
 	EOF
-
 	ACCEPT_KEYWORDS=~amd64 USE=dlang_single_target_gdc-14 emerge -1j dev-lang/ldc2
-	ACCEPT_KEYWORDS=~amd64 emerge -1j dev-lang/swift
 EOS
+RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage \
+	ACCEPT_KEYWORDS=~amd64 emerge -1j dev-lang/swift
 
 # fix system
 RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage \
@@ -38,8 +38,7 @@ RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache
 
 # fix profile
 RUN --mount=type=cache,target=/var/db/repos --mount=type=cache,target=/var/cache/distfiles --mount=type=tmpfs,target=/var/tmp/portage \
-	ACCEPT_KEYWORDS=~amd64 USE=-* emerge -1j \
-		dev-lang/python:3.14t \
+	USE=-* emerge -1j \
 		media-libs/harfbuzz \
 		media-libs/libwebp \
 		media-video/ffmpeg
