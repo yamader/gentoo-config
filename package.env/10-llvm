@@ -24,6 +24,7 @@ app-crypt/chntpw            wnoe-clang16 # [-Wincompatible-pointer-types]; wtf 6
 >=media-gfx/imagemagick-7.1.2.10 wnoe-clang16 # [-Wincompatible-function-pointer-types]
 >=media-libs/virglrenderer-1.2.0 wnoe-clang16 # [-Wincompatible-pointer-types-discards-qualifiers]
 >=sys-fs/lxcfs-6.0.6        wnoe-clang16 # [-Wincompatible-pointer-types-discards-qualifiers]
+>=x11-libs/pango-1.57.0     clang-stable # [-Wunused-but-set-global]
 
 # libcxx incompat
 <dev-libs/darts-0.33  libstdcxx # libcxx-22: no member named 'random_shuffle' in namespace 'std'

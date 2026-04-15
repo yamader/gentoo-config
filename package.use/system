@@ -1,6 +1,5 @@
 */* LUA_TARGETS: luajit
 */* PYTHON_TARGETS: python3_15t python3_14t
-*/* RUBY_TARGETS: ruby34
 
 app-emulation/wine-* -abi_x86_32 wow64
 dev-lang/python -bluetooth

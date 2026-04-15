@@ -1,0 +1,2 @@
+CFLAGS="${CFLAGS} \
+	-Wno-error=unused-but-set-global" # x11-libs/pango
