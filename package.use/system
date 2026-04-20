@@ -12,7 +12,7 @@ sys-apps/openrc sysv-utils -sysvinit
 sys-auth/pambase -passwdqc
 sys-boot/grub GRUB_PLATFORMS: efi-64 # ieee1275 uboot
 sys-firmware/intel-microcode initramfs
-sys-kernel/cachyos-sources -bore eevdf llvm-lto-thin -llvm-lto-thin-dist
+sys-kernel/cachyos-sources -bore eevdf -hz_ticks_1000 hz_ticks_250 llvm-lto-thin -llvm-lto-thin-dist
 sys-kernel/gentoo-kernel-bin modules-compress
 sys-kernel/installkernel dracut grub
 sys-kernel/linux-firmware compress-xz
