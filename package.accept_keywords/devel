@@ -1,5 +1,5 @@
 <dev-lang/python-0.3.15.9999:3.15t **
-<sys-devel/gcc-16.0.9999:16 **
+<sys-devel/gcc-17.0.9999:17 **
 
 # llvm binaries
 <dev-util/spirv-llvm-translator-23.0.0.9999 ** # for libclc
