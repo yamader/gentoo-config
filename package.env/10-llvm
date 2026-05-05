@@ -6,6 +6,7 @@ sys-devel/gcc gcc # gdc
 <dev-lang/gnu-apl-1.9     gcc bfd # clang-23: invalid operands to binary expression; lld-23: *.o is incompatible with elf32-i386
 <dev-lisp/clisp-2.50      gcc # clang-22: src/compiler.lisp: LIST-INIT-START: start index 44801 too large for
 >=sys-fs/bees-0.11        gcc # clang++-23: bits/fcntl-linux.h: openat2 is missing exception specification throw()
+net-misc/telnet-bsd       gcc # ansi
 app-office/libreoffice    clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
 dev-cpp/highway           clang-stable # always_inline function * requires target feature 'avx512f', but would be inlined into function compiled without support for 'avx512f'
 media-libs/gegl           clang-stable # ICE
