@@ -1,35 +1,21 @@
-*/* -gnome-online-accounts
-*/* lsp nerdfonts
 app-alternatives/awk -gawk mawk
 app-alternatives/gpg freepg -reference
 app-alternatives/gzip pigz -reference
 app-crypt/freepg tools
-app-crypt/gnupg tools
-app-crypt/rnp doc
 app-editors/emacs -gui
-app-emulation/qemu -pin-upstream-blobs static-user spice usbredir virgl
+app-emulation/qemu -pin-upstream-blobs spice static-user usbredir virgl
 app-emulation/qemu QEMU_SOFTMMU_TARGETS: aarch64 arm ppc64
 app-emulation/qemu QEMU_USER_TARGETS: aarch64 arm ppc64
 app-i18n/fcitx-meta skk rime
 app-text/texlive extra games graphics luatex music science
 dev-lang/python tail-call-interp
-dev-libs/nss utils
-dev-util/stylua lua52 lua53 lua54 luau
 gnome-base/gvfs mtp
-gui-apps/waybar experimental network tray wifi
+gui-apps/waybar backlight experimental network tray wifi
 gui-apps/xremap wlroots
-gui-wm/dwl savedconfig
-gui-wm/wayfire -dbus
-media-fonts/noto-emoji icons
+gui-wm/wayfire -dbus # to use wayfire-session's bus
 media-sound/easyeffects -doc # omit webkit-gtk deps
 sys-apps/busybox -pam static
 sys-apps/util-linux tty-helpers
-virtual/wine proton
 www-client/firefox -pgo -telemetry # pgo: can't work with wayland
 www-client/w3m imlib
 www-servers/h2o -mruby
-www-servers/nginx NGINX_MODULES_HTTP: addition fancyindex
-x11-misc/nitrogen xinerama
-x11-misc/polybar ipc mpd network
-x11-misc/xscreensaver suid
-x11-misc/xsecurelock mpv xscreensaver
