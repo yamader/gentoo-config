@@ -1,1 +1,2 @@
->=media-sound/easyeffects-8 # kde
+>=app-editors/neovim-0.12 # temp
+>=media-sound/easyeffects-8 # qt
