@@ -1,8 +1,10 @@
 */* PERL_FEATURES: ithreads
+*/* PYTHON_TARGETS: python3_13
 */* RUBY_TARGETS: ruby40
 
 # REQUIRED_USE
 app-containers/docker-credential-helpers keyring # any-of ( keyring pass )
+app-misc/fastfetch LUA_SINGLE_TARGET: lua5-4 # lua? ( exactly-one-of ( lua_single_target_lua5-3 lua_single_target_lua5-4 ) )
 dev-lang/php -readline # cli? ( exactly-one-of ( readline libedit ) )
 dev-libs/libpcre -readline # readline? ( !libedit ) libedit? ( !readline )
 dev-libs/libpcre2 -readline # at-most-one-of ( libedit readline )
