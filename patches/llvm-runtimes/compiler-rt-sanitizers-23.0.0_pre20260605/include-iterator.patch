@@ -1,0 +1,4 @@
+--- a/compiler-rt/lib/orc/record_section_tracker.h
++++ b/compiler-rt/lib/orc/record_section_tracker.h
+@@ -19,0 +20 @@
++#include <iterator>

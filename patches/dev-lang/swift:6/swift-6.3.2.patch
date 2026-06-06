@@ -1,0 +1,24 @@
+--- a/llbuild/lib/llvm/Demangle/Utility.h
++++ b/llbuild/lib/llvm/Demangle/Utility.h
+@@ -20,0 +21 @@
++#include <exception>
+--- a/llbuild/lib/llvm/Demangle/ItaniumDemangle.cpp
++++ b/llbuild/lib/llvm/Demangle/ItaniumDemangle.cpp
+@@ -24,0 +25 @@
++#include <type_traits>
+--- a/llvm-project/llvm/include/llvm/Support/thread.h
++++ b/llvm-project/llvm/include/llvm/Support/thread.h
+@@ -20,0 +21 @@
++#include <exception>
+--- a/llvm-project/llvm/include/llvm/Support/Error.h
++++ b/llvm-project/llvm/include/llvm/Support/Error.h
+@@ -25,0 +26 @@
++#include <cerrno>
+--- a/swift/stdlib/public/Cxx/cxxshim/libcxxstdlibshim.h
++++ b/swift/stdlib/public/Cxx/cxxshim/libcxxstdlibshim.h
+@@ -1,0 +2 @@
++#include <cstdint>
+--- a/llvm-project/lldb/include/lldb/lldb-private-interfaces.h
++++ b/llvm-project/lldb/include/lldb/lldb-private-interfaces.h
+@@ -17,0 +18 @@
++#include <vector>

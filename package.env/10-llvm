@@ -29,6 +29,7 @@ app-crypt/chntpw            wnoe-clang16 # [-Wincompatible-pointer-types]; wtf 6
 
 # libcxx incompat
 <dev-libs/darts-0.33  libstdcxx # libcxx-22: no member named 'random_shuffle' in namespace 'std'
+>=media-libs/openal-1.25.2 gcc # libc++-23: no matching function for call to object of type 'const __transform::__fn': couldn't infer template argument '_Fn'
 sys-process/btop      libstdcxx # segv: https://github.com/aristocratos/btop/issues/619
 
 # other incompat
