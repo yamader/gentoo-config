@@ -1,0 +1,4 @@
+--- a/src/3rdparty/resonance-audio/resonance_audio/utils/wav.h
++++ b/src/3rdparty/resonance-audio/resonance_audio/utils/wav.h
+@@ -0,0 +1 @@
++#include <istream>

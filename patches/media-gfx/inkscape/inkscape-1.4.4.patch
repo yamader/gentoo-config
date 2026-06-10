@@ -1,0 +1,9 @@
+--- a/src/io/stream/gzipstream.cpp
++++ b/src/io/stream/gzipstream.cpp
+@@ -0,0 +1 @@
++#include <new>
+
+--- a/src/util/longest-common-suffix.h
++++ b/src/util/longest-common-suffix.h
+@@ -0,0 +1 @@
++#include <vector>

@@ -1,0 +1,40 @@
+--- a/thirdparty/clipper2/Clipper2Lib/include/clipper2/clipper.core.h
++++ b/thirdparty/clipper2/Clipper2Lib/include/clipper2/clipper.core.h
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/libs/kimath/include/geometry/shape_compound.h
++++ b/libs/kimath/include/geometry/shape_compound.h
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/include/pgm_base.h
+--- b/include/pgm_base.h
+@@ -0,0 +1 @@
++#include <atomic>
+--- a/include/libraries/library_manager.h
++++ b/include/libraries/library_manager.h
+@@ -0,0 +1 @@
++#include <atomic>
+--- a/include/kicad_curl/kicad_curl_easy.h
++++ b/include/kicad_curl/kicad_curl_easy.h
+@@ -0,0 +1 @@
++#include <vector>
+--- a/include/page_info.h
++++ b/include/page_info.h
+@@ -0,0 +1 @@
++#include <vector>
+--- a/include/template_fieldnames.h
++++ b/include/template_fieldnames.h
+@@ -0,0 +1 @@
++#include <vector>
+--- a/eeschema/sim/spice_library_parser.h
++++ b/eeschema/sim/spice_library_parser.h
+@@ -0,0 +1 @@
++#include <vector>
+--- a/include/property_holder.h
++++ b/include/property_holder.h
+@@ -0,0 +1 @@
++#include <vector>
+--- a/pcbnew/exporters/export_d356.h
++++ b/pcbnew/exporters/export_d356.h
+@@ -0,0 +1 @@
++#include <vector>

@@ -1,0 +1,10 @@
+--- a/src/cc/bcc_btf.cc
++++ b/src/cc/bcc_btf.cc
+@@ -0,0 +1,2 @@
++#include <cerrno>
++#include <cstdlib>
+
+--- a/tests/cc/test_c_api.cc
++++ b/tests/cc/test_c_api.cc
+@@ -0,0 +1 @@
++#include <sched.h>
