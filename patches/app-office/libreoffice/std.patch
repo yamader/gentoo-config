@@ -1,0 +1,92 @@
+--- a/stoc/source/simpleregistry/simpleregistry.cxx
++++ b/stoc/source/simpleregistry/simpleregistry.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/package/inc/ZipFile.hxx
++++ b/package/inc/ZipFile.hxx
+@@ -0,0 +1 @@
++#include <vector>
+--- a/package/source/xstor/ocompinstream.cxx
++++ b/package/source/xstor/ocompinstream.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/package/source/xstor/owriteablestream.cxx
++++ b/package/source/xstor/owriteablestream.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/package/source/xstor/xstorage.cxx
++++ b/package/source/xstor/xstorage.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/i18npool/source/localedata/localedata.cxx
++++ b/i18npool/source/localedata/localedata.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/i18npool/source/numberformatcode/numberformatcode.cxx
++++ b/i18npool/source/numberformatcode/numberformatcode.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/i18npool/source/transliteration/ignoreDiacritics_CTL.cxx
++++ b/i18npool/source/transliteration/ignoreDiacritics_CTL.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/xmloff/source/chart/SchXMLParagraphContext.hxx
++++ b/xmloff/source/chart/SchXMLParagraphContext.hxx
+@@ -0,0 +1 @@
++#include <vector>
+--- a/xmloff/source/core/fasttokenhandler.cxx
++++ b/xmloff/source/core/fasttokenhandler.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/include/xmloff/GradientStyle.hxx
++++ b/include/xmloff/GradientStyle.hxx
+@@ -0,0 +1 @@
++#include <vector>
+--- a/fpicker/source/office/contentenumeration.hxx
++++ b/fpicker/source/office/contentenumeration.hxx
+@@ -0,0 +1 @@
++#include <vector>
+--- a/linguistic/source/misc2.cxx
++++ b/linguistic/source/misc2.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/linguistic/source/misc.cxx
++++ b/linguistic/source/misc.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/linguistic/source/thesdsp.cxx
++++ b/linguistic/source/thesdsp.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/linguistic/source/spelldsp.cxx
++++ b/linguistic/source/spelldsp.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/accessibility/source/standard/vclxaccessibleradiobutton.cxx
++++ b/accessibility/source/standard/vclxaccessibleradiobutton.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/basic/source/comp/buffer.cxx
++++ b/basic/source/comp/buffer.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/sfx2/source/sidebar/ResourceManager.cxx
++++ b/sfx2/source/sidebar/ResourceManager.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/oox/source/token/tokenmap.cxx
++++ b/oox/source/token/tokenmap.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/scripting/source/vbaevents/eventhelper.cxx
++++ b/scripting/source/vbaevents/eventhelper.cxx
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/sc/inc/broadcast.hxx
++++ b/sc/inc/broadcast.hxx
+@@ -0,0 +1 @@
++#include <vector>
+--- a/sw/source/ui/vba/vbavariables.cxx
++++ b/sw/source/ui/vba/vbavariables.cxx
+@@ -0,0 +1 @@
++#include <iterator>
