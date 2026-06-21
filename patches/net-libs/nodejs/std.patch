@@ -1,0 +1,4 @@
++++ a/deps/ncrypto/ncrypto.cc
+--- b/deps/ncrypto/ncrypto.cc
+@@ -0,0 +1 @@
++#include <vector>

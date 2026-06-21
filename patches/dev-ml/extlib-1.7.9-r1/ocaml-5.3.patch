@@ -1,0 +1,8 @@
+--- a/src/extArray.mli
++++ b/src/extArray.mli
+@@ -116 +116 @@
+-  external create_float : int -> float array = "caml_make_float_vect"
++  external create_float : int -> float array = "caml_array_create_float"
+@@ -152,1 +152,1 @@
+-  external make : int -> 'a -> 'a array = "caml_make_vect"
++  external make : int -> 'a -> 'a array = "caml_array_make"

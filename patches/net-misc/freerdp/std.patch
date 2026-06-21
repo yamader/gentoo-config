@@ -1,0 +1,4 @@
+--- a/client/SDL/common/sdl_common_utils.hpp
++++ b/client/SDL/common/sdl_common_utils.hpp
+@@ -0,0 +1 @@
++#include <cstdlib>

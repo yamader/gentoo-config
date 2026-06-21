@@ -1,0 +1,8 @@
+--- a/include/vlc_cxx_helpers.hpp
++++ b/include/vlc_cxx_helpers.hpp
+@@ -0,0 +1 @@
++#include <cstdlib>
+--- a/modules/gui/qt/maininterface/compositor_x11_utils.cpp
++++ b/modules/gui/qt/maininterface/compositor_x11_utils.cpp
+@@ -0,0 +1 @@
++#include <iterator>

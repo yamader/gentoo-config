@@ -1,0 +1,8 @@
+--- a/src/jdk.jpackage/share/native/common/SysInfo.h
++++ b/src/jdk.jpackage/share/native/common/SysInfo.h
+@@ -0,0 +1 @@
++#include <new>
+--- a/src/jdk.jpackage/linux/native/libapplauncher/Package.cpp
++++ b/src/jdk.jpackage/linux/native/libapplauncher/Package.cpp
+@@ -0,0 +1 @@
++#include <new>
