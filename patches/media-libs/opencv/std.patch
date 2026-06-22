@@ -1,0 +1,8 @@
+--- a/modules/gapi/include/opencv2/gapi/gasync_context.hpp
++++ b/modules/gapi/include/opencv2/gapi/gasync_context.hpp
+@@ -0,0 +1 @@
++#include <atomic>
+--- a/modules/gapi/include/opencv2/gapi/infer/ie.hpp
++++ b/modules/gapi/include/opencv2/gapi/infer/ie.hpp
+@@ -0,0 +1 @@
++#include <iterator>
