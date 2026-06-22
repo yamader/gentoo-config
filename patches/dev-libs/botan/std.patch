@@ -1,0 +1,12 @@
+--- a/src/lib/utils/buffer_stuffer.h
++++ b/src/lib/utils/buffer_stuffer.h
+@@ -0,0 +1 @@
++#include <algorithm>
+--- a/src/lib/pubkey/xmss/xmss_address.h
++++ b/src/lib/pubkey/xmss/xmss_address.h
+@@ -0,0 +1 @@
++#include <algorithm>
+--- a/src/lib/utils/mem_pool/mem_pool.cpp
++++ b/src/lib/utils/mem_pool/mem_pool.cpp
+@@ -0,0 +1 @@
++#include <exception>

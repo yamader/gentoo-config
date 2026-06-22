@@ -1,4 +1,8 @@
-+++ a/deps/ncrypto/ncrypto.cc
---- b/deps/ncrypto/ncrypto.cc
+--- a/deps/ncrypto/ncrypto.cc
++++ b/deps/ncrypto/ncrypto.cc
 @@ -0,0 +1 @@
 +#include <vector>
+--- a/deps/LIEF/third-party/frozen/include/frozen/map.h
++++ a/deps/LIEF/third-party/frozen/include/frozen/map.h
+@@ -0,0 +1 @@
++#include <functional>

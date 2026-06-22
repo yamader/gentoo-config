@@ -1,0 +1,20 @@
+--- a/libraries/lib-utility/MemoryX.h
++++ b/libraries/lib-utility/MemoryX.h
+@@ -0,0 +1 @@
++#include <atomic>
+--- a/libraries/lib-string-utils/ToChars.cpp
++++ b/libraries/lib-string-utils/ToChars.cpp
+@@ -0,0 +1 @@
++#include <algorithm>
+--- a/libraries/lib-mixer/AudioIOSequences.h
++++ b/libraries/lib-mixer/AudioIOSequences.h
+@@ -0,0 +1 @@
++#include <vector>
+--- a/libraries/lib-import-export/LibsndfileTagger.cpp
++++ b/libraries/lib-import-export/LibsndfileTagger.cpp
+@@ -0,0 +1 @@
++#include <algorithm>
+--- a/libraries/lib-wx-init/JournalRegistry.h
++++ b/libraries/lib-wx-init/JournalRegistry.h
+@@ -0,0 +1 @@
++#include <vector>

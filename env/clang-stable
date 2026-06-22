@@ -1,2 +1,2 @@
-CC=clang-21
-CXX=clang++-21
+CC=clang-22
+CXX=clang++-22
