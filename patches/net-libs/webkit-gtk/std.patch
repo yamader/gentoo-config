@@ -1,0 +1,4 @@
+--- a/Source/WebCore/platform/graphics/texmap/TextureMapperLayer3DRenderingContext.cpp
++++ b/Source/WebCore/platform/graphics/texmap/TextureMapperLayer3DRenderingContext.cpp
+@@ -0,0 +1 @@
++#include <vector>

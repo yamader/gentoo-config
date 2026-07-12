@@ -10,6 +10,7 @@ dev-lang/php cgi cli exif ffi fpm mysqli postgres sqlite threads zip
 dev-lang/ruby jit
 dev-lang/rust LLVM_TARGETS: AArch64 WebAssembly
 dev-lang/rust rust-analyzer wasm
+dev-lang/swift libcxx
 llvm-core/clang LLVM_TARGETS: Xtensa
 llvm-core/llvm LLVM_TARGETS: Xtensa
 llvm-runtimes/libunwind -debug

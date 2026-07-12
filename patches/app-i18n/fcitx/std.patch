@@ -1,0 +1,4 @@
+--- a/src/lib/fcitx-utils/eventloopinterface.h
++++ b/src/lib/fcitx-utils/eventloopinterface.h
+@@ -0,0 +1 @@
++#include <sys/types.h>
