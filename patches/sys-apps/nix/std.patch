@@ -1,0 +1,4 @@
+--- a/src/libutil/include/nix/util/bump-memory-resource.hh
++++ b/src/libutil/include/nix/util/bump-memory-resource.hh
+@@ -0,0 +1 @@
++#include <new>

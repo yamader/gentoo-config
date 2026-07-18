@@ -1,0 +1,17 @@
+--- a/src/libstore/s3-binary-cache-store.cc
++++ b/src/libstore/s3-binary-cache-store.cc
+@@ -14,0 +15 @@
++#include <tuple>
+@@ -379 +380 @@
+-        fileTransfer->enqueueFileTransfer(req).get();
++        std::ignore = fileTransfer->enqueueFileTransfer(req).get();
+@@ -412 +413 @@
+-    fileTransfer->enqueueFileTransfer(req).get();
++    std::ignore = fileTransfer->enqueueFileTransfer(req).get();
+--- a/src/libfetchers/git-utils.cc
++++ b/src/libfetchers/git-utils.cc
+@@ -47,0 +48 @@
++#include <tuple>
+@@ -971 +972 @@
+-            lookupCache.emplace(path2, std::move(copy)).first->second.get();
++            std::ignore = lookupCache.emplace(path2, std::move(copy)).first->second.get();

@@ -5,6 +5,7 @@ sys-devel/gcc gcc # gdc
 ~dev-debug/systemtap-5.4  gcc # clang: <ext/stdio_filebuf.h> file not found
 <dev-lang/gnu-apl-1.9     gcc bfd # clang-23: invalid operands to binary expression; lld-23: *.o is incompatible with elf32-i386
 <dev-lisp/clisp-2.50      gcc # clang-22: src/compiler.lisp: LIST-INIT-START: start index 44801 too large for
+>=sci-libs/openblas-0.3.34 gcc # lld: error: undefined reference: GOMP_has_masked_thread_num
 >=sys-fs/bees-0.11        gcc # clang++-23: bits/fcntl-linux.h: openat2 is missing exception specification throw()
 net-misc/telnet-bsd       gcc # ansi
 app-office/libreoffice    clang-stable # skia: use of undeclared identifier '__builtin_ia32_vcvtph2ps256'
