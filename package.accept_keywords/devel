@@ -2,37 +2,36 @@
 <sys-devel/gcc-17.0.9999:17 **
 
 # llvm binaries
-<dev-util/spirv-llvm-translator-23.0.0.9999 ** # for libclc
-<llvm-core/clang-23.0.0.9999 **
-<llvm-core/clang-common-23.0.0.9999 **
-<llvm-core/flang-23.0.0.9999 **
-<llvm-core/lld-23.0.0.9999 **
-<llvm-core/lldb-23.0.0.9999 **
-<llvm-core/llvm-23.0.0.9999 **
-<llvm-core/llvm-common-23.0.0.9999 **
-<llvm-core/mlir-23.0.0.9999 **
-<llvm-core/polly-23.0.0.9999 **
-<llvm-runtimes/compiler-rt-23.0.0.9999 **
-<llvm-runtimes/compiler-rt-sanitizers-23.0.0.9999 **
-<llvm-runtimes/flang-rt-23.0.0.9999 **
-<llvm-runtimes/libclc-23.0.0.9999 **
-<llvm-runtimes/libcxx-23.0.0.9999 **
-<llvm-runtimes/libcxxabi-23.0.0.9999 **
-<llvm-runtimes/libgcc-23.0.0.9999 **
-<llvm-runtimes/libunwind-23.0.0.9999 **
-<llvm-runtimes/offload-23.0.0.9999 **
-<llvm-runtimes/openmp-23.0.0.9999 **
-
-# llvm misc binaries
-llvm-core/llvmgold **
-llvm-runtimes/libatomic-stub **
-
-# llvm configs
-llvm-core/clang-linker-config **
-llvm-core/clang-toolchain-symlinks **
-llvm-core/lld-toolchain-symlinks **
-llvm-core/llvm-toolchain-symlinks **
-llvm-runtimes/clang-rtlib-config **
-llvm-runtimes/clang-runtime **
-llvm-runtimes/clang-stdlib-config **
-llvm-runtimes/clang-unwindlib-config **
+<dev-util/spirv-llvm-translator-24.0.0.9999 ** # for libclc
+<llvm-core/clang-24.0.0.9999 **
+<llvm-core/clang-common-24.0.0.9999 **
+<llvm-core/clang-linker-config-24.0.0.9999 **
+<llvm-core/clang-toolchain-symlinks-24.0.0.9999 **
+<llvm-core/flang-24.0.0.9999 **
+<llvm-core/lld-24.0.0.9999 **
+<llvm-core/lld-toolchain-symlinks-24.0.0.9999 **
+<llvm-core/lldb-24.0.0.9999 **
+<llvm-core/llvm-24.0.0.9999 **
+<llvm-core/llvm-common-24.0.0.9999 **
+<llvm-core/llvm-toolchain-symlinks-24.0.0.9999 **
+<llvm-core/llvmgold-24.0.0.9999 **
+<llvm-core/mlir-24.0.0.9999 **
+<llvm-core/polly-24.0.0.9999 **
+<llvm-runtimes/clang-rtlib-config-24.0.0.9999 **
+<llvm-runtimes/clang-runtime-24.0.0.9999 **
+<llvm-runtimes/clang-stdlib-config-24.0.0.9999 **
+<llvm-runtimes/clang-unwindlib-config-24.0.0.9999 **
+<llvm-runtimes/compiler-rt-24.0.0.9999 **
+<llvm-runtimes/compiler-rt-sanitizers-24.0.0.9999 **
+<llvm-runtimes/flang-rt-24.0.0.9999 **
+<llvm-runtimes/libatomic-stub-24.0.0.9999 **
+<llvm-runtimes/libclc-24.0.0.9999 **
+<llvm-runtimes/libcxx-24.0.0.9999 **
+<llvm-runtimes/libcxxabi-24.0.0.9999 **
+<llvm-runtimes/libgcc-24.0.0.9999 **
+<llvm-runtimes/libunwind-24.0.0.9999 **
+<llvm-runtimes/offload-24.0.0.9999 **
+<llvm-runtimes/openmp-24.0.0.9999 **
+<llvm-runtimes/openmp-amdgcn-amd-amdhsa-24.0.0.9999 **
+<llvm-runtimes/openmp-nvptx64-nvidia-cuda-24.0.0.9999 **
+<llvm-runtimes/openmp-spirv64-intel-24.0.0.9999 **
