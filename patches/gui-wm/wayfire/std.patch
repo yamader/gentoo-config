@@ -1,0 +1,12 @@
+--- a/src/api/wayfire/geometry.hpp
++++ b/src/api/wayfire/geometry.hpp
+@@ -0,0 +1 @@
++#include <cmath>
+--- a/src/api/wayfire/signal-provider.hpp
++++ b/src/api/wayfire/signal-provider.hpp
+@@ -0,0 +1 @@
++#include <vector>
+--- a/src/geometry.cpp
++++ b/src/geometry.cpp
+@@ -0,0 +1 @@
++#include <ostream>
