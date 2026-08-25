@@ -1,4 +1,5 @@
 app-editors/vscode Microsoft-vscode
+app-office/obsidian Obsidian-EULA
 app-text/cpdf Coherent-Graphics
 dev-util/nvidia-cuda-toolkit NVIDIA-CUDA
 games-action/minecraft-launcher Mojang
