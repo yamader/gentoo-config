@@ -1,0 +1,23 @@
+From bac01f229967f6a3e446115054e1761d5777702d Mon Sep 17 00:00:00 2001
+From: YamaD <me@dyama.net>
+Date: Sat, 5 Sep 2026 10:44:10 +0900
+Subject: [PATCH] decoration: fix render region
+
+Partially reverts d4835f263.
+---
+ plugins/decor/deco-subsurface.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/decor/deco-subsurface.cpp b/plugins/decor/deco-subsurface.cpp
+index 0d3c8da91..8a9129509 100644
+--- a/plugins/decor/deco-subsurface.cpp
++++ b/plugins/decor/deco-subsurface.cpp
+@@ -189,7 +189,7 @@ class simple_decoration_node_t : public wf::scene::node_t, public wf::pointer_in
+         void schedule_instructions(std::vector<wf::scene::render_instruction_t>& instructions,
+             const wf::render_target_t& target, wf::regionf_t& damage) override
+         {
+-            auto our_region = self->get_bounding_box();
++            auto our_region = self->cached_region + self->get_offset();
+             wf::regionf_t our_damage = damage & our_region;
+             if (!our_damage.empty())
+             {
