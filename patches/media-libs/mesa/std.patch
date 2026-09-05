@@ -1,0 +1,4 @@
+--- a/src/amd/compiler/aco_util.h
++++ b/src/amd/compiler/aco_util.h
+@@ -0,0 +1 @@
++#include <algorithm>

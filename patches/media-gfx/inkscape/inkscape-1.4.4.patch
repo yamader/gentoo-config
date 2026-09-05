@@ -2,8 +2,51 @@
 +++ b/src/io/stream/gzipstream.cpp
 @@ -0,0 +1 @@
 +#include <new>
-
 --- a/src/util/longest-common-suffix.h
 +++ b/src/util/longest-common-suffix.h
 @@ -0,0 +1 @@
 +#include <vector>
+--- a/src/path/path-boolop.cpp
++++ b/src/path/path-boolop.cpp
+@@ -167 +167,2 @@
+-    shape.ConvertToForme(&res, 1, std::begin({ &path }));
++    Path *a[] = { &path };
++    shape.ConvertToForme(&res, 1, a);
+@@ -202 +203,2 @@
+-    shape.ConvertToFormeNested(&path, 2, std::begin({ &patha, &pathb }), num_nesting, nesting, conts, true);
++    Path *a[] = { &patha, &pathb };
++    shape.ConvertToFormeNested(&path, 2, a, num_nesting, nesting, conts, true);
+@@ -245 +247,2 @@
+-        shape.ConvertToForme(&result, 2, std::begin({ &patha, &pathb }));
++        Path *a[] = { &patha, &pathb };
++        shape.ConvertToForme(&result, 2, a);
+@@ -267 +270,2 @@
+-        shape.ConvertToForme(&result, 2, std::begin({ &pathb, &patha }), true);
++        Path *a[] = { &pathb, &patha };
++        shape.ConvertToForme(&result, 2, a, true);
+--- a/src/ui/widget/canvas/glgraphics.cpp
++++ b/src/ui/widget/canvas/glgraphics.cpp
+@@ -23 +23,2 @@
+-    glUniformMatrix2fv(location, 1, GL_FALSE, std::begin({(GLfloat)affine[0], (GLfloat)affine[1], (GLfloat)affine[2], (GLfloat)affine[3]}));
++    GLfloat v[] = {(GLfloat)affine[0], (GLfloat)affine[1], (GLfloat)affine[2], (GLfloat)affine[3]};
++    glUniformMatrix2fv(location, 1, GL_FALSE, v);
+@@ -28 +29,2 @@
+-    glUniform2fv(location, 1, std::begin({(GLfloat)affine[4], (GLfloat)affine[5]}));
++    GLfloat v[] = {(GLfloat)affine[4], (GLfloat)affine[5]};
++    glUniform2fv(location, 1, v);
+@@ -39 +41,2 @@
+-    glUniform2fv(location, 1, std::begin({(GLfloat)vec.x(), (GLfloat)vec.y()}));
++    GLfloat v[] = {(GLfloat)vec.x(), (GLfloat)vec.y()};
++    glUniform2fv(location, 1, v);
+@@ -740 +743,2 @@
+-            glUniform2fv(shadow.loc("wh"), 1, std::begin({(GLfloat)view.rect.width(), (GLfloat)view.rect.height()}));
++            GLfloat v[] = {(GLfloat)view.rect.width(), (GLfloat)view.rect.height()};
++            glUniform2fv(shadow.loc("wh"), 1, v);
+@@ -742 +746,2 @@
+-            glUniform2fv(shadow.loc("dir"), 1, std::begin({(GLfloat)dir.x(), (GLfloat)dir.y()}));
++            GLfloat v2[] = {(GLfloat)dir.x(), (GLfloat)dir.y()};
++            glUniform2fv(shadow.loc("dir"), 1, v2);
+@@ -854 +859,2 @@
+-        glUniform2fv(shader.loc("pos"), 1, std::begin({(GLfloat)(a.mouse->x() * scale_factor), (GLfloat)((view.rect.height() - a.mouse->y()) * scale_factor)}));
++        GLfloat v[] = {(GLfloat)(a.mouse->x() * scale_factor), (GLfloat)((view.rect.height() - a.mouse->y()) * scale_factor)};
++        glUniform2fv(shader.loc("pos"), 1, v);

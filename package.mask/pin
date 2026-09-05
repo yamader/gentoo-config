@@ -1,1 +1,2 @@
 >=app-editors/neovim-0.12 # temp
+>=dev-lua/lpeg-1.1.0 # neovim-0.11.7
