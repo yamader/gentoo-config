@@ -1,0 +1,4 @@
+--- a/core/src/librscpp/poly.h
++++ b/core/src/librscpp/poly.h
+@@ -0,0 +1 @@
++#include <cmath>

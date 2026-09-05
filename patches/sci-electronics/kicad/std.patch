@@ -2,22 +2,26 @@
 +++ b/thirdparty/clipper2/Clipper2Lib/include/clipper2/clipper.core.h
 @@ -0,0 +1 @@
 +#include <iterator>
---- a/libs/kimath/include/geometry/shape_compound.h
-+++ b/libs/kimath/include/geometry/shape_compound.h
+--- a/libs/kimath/src/geometry/shape_compound.cpp
++++ b/libs/kimath/src/geometry/shape_compound.cpp
 @@ -0,0 +1 @@
 +#include <iterator>
---- a/include/pgm_base.h
---- b/include/pgm_base.h
+--- a/libs/kinng/include/kinng.h
++++ b/libs/kinng/include/kinng.h
 @@ -0,0 +1 @@
-+#include <atomic>
---- a/include/libraries/library_manager.h
-+++ b/include/libraries/library_manager.h
++#include <string>
+--- a/include/pgm_base.h
++++ b/include/pgm_base.h
 @@ -0,0 +1 @@
 +#include <atomic>
 --- a/include/kicad_curl/kicad_curl_easy.h
 +++ b/include/kicad_curl/kicad_curl_easy.h
 @@ -0,0 +1 @@
 +#include <vector>
+--- a/include/libraries/library_manager.h
++++ b/include/libraries/library_manager.h
+@@ -0,0 +1 @@
++#include <atomic>
 --- a/include/page_info.h
 +++ b/include/page_info.h
 @@ -0,0 +1 @@
