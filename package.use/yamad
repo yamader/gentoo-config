@@ -18,4 +18,3 @@ sys-apps/busybox -pam static
 sys-apps/util-linux tty-helpers
 www-client/firefox -pgo -telemetry # pgo: can't work with wayland
 www-client/w3m imlib
-www-servers/h2o -mruby
