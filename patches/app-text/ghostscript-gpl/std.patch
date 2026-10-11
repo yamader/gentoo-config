@@ -1,0 +1,4 @@
+--- a/tesseract/src/arch/simddetect.cpp
++++ b/tesseract/src/arch/simddetect.cpp
+@@ -0,0 +1 @@
++#include <cstdlib>

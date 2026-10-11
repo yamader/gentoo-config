@@ -1,0 +1,4 @@
+--- a/src/libixion/table.cpp
++++ b/src/libixion/table.cpp
+@@ -0,0 +1 @@
++#include <ostream>
