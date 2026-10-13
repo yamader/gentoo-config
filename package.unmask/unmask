@@ -1,2 +1,3 @@
 app-i18n/*::gentoo-zh
 sys-apps/guix::nix-guix
+sys-boot/ventoy-bin::gentoo-zh
