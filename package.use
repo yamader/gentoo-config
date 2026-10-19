@@ -1,0 +1,7 @@
+sys-apps/busybox -pam static
+sys-kernel/cachyos-kernel llvm-lto-thin -llvm-lto-none hz_ticks_100 -hz_ticks_1000 mgeneric_v3 -mnative
+sys-kernel/installkernel dracut grub
+
+# required by busybox
+virtual/libcrypt static-libs
+sys-libs/libxcrypt static-libs
