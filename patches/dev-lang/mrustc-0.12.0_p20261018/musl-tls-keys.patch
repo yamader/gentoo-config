@@ -1,0 +1,134 @@
+Author: Claude Opus 5.5 <noreply@anthropic.com>
+
+mrustc has no #[thread_local], so its std uses one pthread key per
+thread_local!. musl caps keys at 128 and the mrustc-built rustc needs more,
+which makes dev-lang/rust USE=mrustc-bootstrap abort with
+"fatal runtime error: out of TLS keys". Multiplex the keys over a single
+pthread key. Only compiled for musl without native TLS (i.e. mrustc).
+
+--- a/rustc-1.90.0-src.patch
++++ b/rustc-1.90.0-src.patch
+@@ -41,3 +41,123 @@
+          V::Result::output()
+      }
+  }
++--- library/std/src/sys/thread_local/key/musl_mux.rs
+++++ library/std/src/sys/thread_local/key/musl_mux.rs
++@@ -0,0 +1,98 @@
+++//! musl only provides `PTHREAD_KEYS_MAX` (128) TLS keys. That is enough with
+++//! native TLS, but std built by a compiler without `#[thread_local]` support
+++//! (mrustc) needs one key per `thread_local!`, and rustc alone uses more than
+++//! 128. So multiplex all keys over a single pthread key that holds a
+++//! per-thread slot table.
+++
+++use super::unix;
+++use crate::mem;
+++use crate::sync::atomic::{AtomicUsize, Ordering};
+++
+++pub type Key = usize;
+++
+++// Same as glibc's PTHREAD_KEYS_MAX.
+++const MAX_KEYS: usize = 1024;
+++
+++const NO_DTOR: AtomicUsize = AtomicUsize::new(0);
+++static DTORS: [AtomicUsize; MAX_KEYS] = [NO_DTOR; MAX_KEYS];
+++// Key 0 is never handed out, `LazyKey` uses it as its sentinel.
+++static NEXT: AtomicUsize = AtomicUsize::new(1);
+++static ROOT: AtomicUsize = AtomicUsize::new(usize::MAX);
+++
+++fn root() -> unix::Key {
+++    let key = ROOT.load(Ordering::Acquire);
+++    if key != usize::MAX {
+++        return key as unix::Key;
+++    }
+++    let new = unix::create(Some(run_dtors));
+++    match ROOT.compare_exchange(usize::MAX, new as usize, Ordering::AcqRel, Ordering::Acquire) {
+++        Ok(_) => new,
+++        Err(key) => {
+++            unsafe { unix::destroy(new) };
+++            key as unix::Key
+++        }
+++    }
+++}
+++
+++fn table() -> *mut *mut u8 {
+++    unsafe { unix::get(root()) as *mut *mut u8 }
+++}
+++
+++pub fn create(dtor: Option<unsafe extern "C" fn(*mut u8)>) -> Key {
+++    let key = NEXT.fetch_add(1, Ordering::Relaxed);
+++    if key >= MAX_KEYS {
+++        rtabort!("out of TLS keys");
+++    }
+++    DTORS[key].store(dtor.map_or(0, |f| f as usize), Ordering::Release);
+++    key
+++}
+++
+++// `LazyKey` only destroys a key after losing the initialization race, before
+++// any value was stored in it, so the slot is simply leaked.
+++pub unsafe fn destroy(_key: Key) {}
+++
+++pub unsafe fn get(key: Key) -> *mut u8 {
+++    let t = table();
+++    if t.is_null() { crate::ptr::null_mut() } else { unsafe { *t.add(key) } }
+++}
+++
+++pub unsafe fn set(key: Key, value: *mut u8) {
+++    let mut t = table();
+++    if t.is_null() {
+++        if value.is_null() {
+++            return;
+++        }
+++        t = unsafe { libc::calloc(MAX_KEYS, mem::size_of::<*mut u8>()) } as *mut *mut u8;
+++        if t.is_null() {
+++            rtabort!("out of memory allocating the TLS table");
+++        }
+++        unsafe { unix::set(root(), t as *mut u8) };
+++    }
+++    unsafe { *t.add(key) = value };
+++}
+++
+++unsafe extern "C" fn run_dtors(t: *mut u8) {
+++    let t = t as *mut *mut u8;
+++    // musl clears the root key before calling us; restore it so destructors
+++    // can still reach the other slots.
+++    unsafe { unix::set(root(), t as *mut u8) };
+++    // Like PTHREAD_DESTRUCTOR_ITERATIONS: rerun while destructors store values.
+++    for _ in 0..4 {
+++        let mut again = false;
+++        for key in 1..NEXT.load(Ordering::Acquire).min(MAX_KEYS) {
+++            let value = unsafe { *t.add(key) };
+++            let dtor = DTORS[key].load(Ordering::Acquire);
+++            if !value.is_null() && dtor != 0 {
+++                unsafe { *t.add(key) = crate::ptr::null_mut() };
+++                let dtor: unsafe extern "C" fn(*mut u8) = unsafe { mem::transmute(dtor) };
+++                unsafe { dtor(value) };
+++                again = true;
+++            }
+++        }
+++        if !again {
+++            break;
+++        }
+++    }
+++    unsafe { unix::set(root(), crate::ptr::null_mut()) };
+++    unsafe { libc::free(t as *mut libc::c_void) };
+++}
++--- library/std/src/sys/thread_local/mod.rs
+++++ library/std/src/sys/thread_local/mod.rs
++@@ -132,7 +132,15 @@
++ /// with a pointer which we can get and set to store our data.
++ pub(crate) mod key {
++     cfg_if::cfg_if! {
++-        if #[cfg(any(
+++        if #[cfg(all(target_env = "musl", not(target_thread_local)))] {
+++            // Only reached when built by mrustc; see musl_mux.rs.
+++            mod musl_mux;
+++            mod racy;
+++            mod unix;
+++            pub(super) use musl_mux::{Key, get, set};
+++            pub(super) use racy::LazyKey;
+++            use musl_mux::{create, destroy};
+++        } else if #[cfg(any(
++             all(
++                 not(target_vendor = "apple"),
++                 not(target_family = "wasm"),
