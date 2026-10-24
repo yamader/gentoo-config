@@ -1,12 +1,16 @@
-*/*-bin                         nobinpkg
-acct-*/*                        nobinpkg
-app-editors/vscode              nobinpkg
+*/*-bin                 nobinpkg
+acct-*/*                nobinpkg
+app-alternatives/*      nobinpkg
+app-eselect/*           nobinpkg
+sys-kernel/*-sources    nobinpkg
+sys-kernel/linux-firmware nobinpkg
+virtual/*               nobinpkg
+yamad/*                 nobinpkg
+
 dev-util/nvidia-cuda-toolkit    nobinpkg
+x11-drivers/nvidia-drivers      nobinpkg
+
+app-editors/vscode              nobinpkg
 media-sound/spotify             nobinpkg
 sci-electronics/kicad-packages3d nobinpkg
-sys-kernel/*-sources            nobinpkg
-sys-kernel/linux-firmware       nobinpkg
-virtual/*                       nobinpkg
 www-client/google-chrome*       nobinpkg
-x11-drivers/nvidia-drivers      nobinpkg
-yamad/*                         nobinpkg

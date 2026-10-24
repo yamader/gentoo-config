@@ -1,8 +1,9 @@
 *~
 ._*
-cross*
+cross-*
 zz-*
 
 /binpkgs
 /gnupg
 /make.profile
+/savedconfig
