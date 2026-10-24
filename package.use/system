@@ -13,10 +13,12 @@ sys-apps/systemd cryptsetup
 sys-auth/pambase -passwdqc
 sys-boot/grub GRUB_PLATFORMS: efi-64 # ieee1275 uboot
 sys-firmware/intel-microcode initramfs
-sys-kernel/cachyos-sources -bore eevdf -hz_ticks_1000 hz_ticks_250 llvm-lto-thin -llvm-lto-thin-dist
+sys-kernel/cachyos-kernel -hz_ticks_1000 hz_ticks_250
+sys-kernel/cachyos-sources -hz_ticks_1000 hz_ticks_250
 sys-kernel/gentoo-kernel-bin modules-compress
 sys-kernel/installkernel dracut grub
 sys-kernel/linux-firmware compress-xz
+x11-drivers/nvidia-drivers dist-kernel modules-compress
 
 dev-util/ccache -static-c++
 gnome-base/gnome -extras
