@@ -1,0 +1,8 @@
+--- a/spa/plugins/audioconvert/test-fmt-ops.c
++++ b/spa/plugins/audioconvert/test-fmt-ops.c
+@@ -112 +112 @@
+-	static const int8_t out[] = { 0, 127, -128, 64, 192, 127, -128, 1, 0, -1, 0 };
++	static const int8_t out[] = { 0, 127, -128, 64, -64, 127, -128, 1, 0, -1, 0 };
+@@ -126 +126 @@
+-	static const int8_t in[] = { 0, 127, -128, 64, 192, };
++	static const int8_t in[] = { 0, 127, -128, 64, -64, };

@@ -1,0 +1,11 @@
+--- a/Build/Include/Makefile.inc
++++ b/Build/Include/Makefile.inc
+@@ -97,7 +97,7 @@
+ # Precompiled headers
+ %.h.gch: %.h
+ 	@echo Precompiling $(<F)
+-	$(CXX) $(CXXFLAGS) -g0 -c $< || (rm -f $(<F).gch && exit 1)
++	$(CXX) $(CXXFLAGS) -g0 -c $< -o $@ || (rm -f $(<F).gch && exit 1)
+ 
+ 
+ # Embedded files

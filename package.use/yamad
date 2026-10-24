@@ -1,4 +1,3 @@
-app-alternatives/awk -gawk mawk
 app-alternatives/gpg freepg -reference
 app-alternatives/gzip pigz -reference
 app-crypt/freepg tools
