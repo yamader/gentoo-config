@@ -1,0 +1,4 @@
+--- a/src/capnp/dynamic.h
++++ b/src/capnp/dynamic.h
+@@ -0,0 +1 @@
++#include <cstddef>
