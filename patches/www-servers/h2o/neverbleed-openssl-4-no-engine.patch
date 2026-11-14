@@ -1,0 +1,88 @@
+--- a/deps/neverbleed/neverbleed.c
++++ b/deps/neverbleed/neverbleed.c
+@@ -94,6 +94,15 @@
+ #endif
+ #endif
+ 
++#if !defined(OPENSSL_IS_BORINGSSL) && !defined(LIBRESSL_VERSION_NUMBER) && OPENSSL_VERSION_NUMBER >= 0x40000000L
++/* ENGINE API is removed in OpenSSL 4.0; the methods are attached to each key directly. */
++#define NEVERBLEED_NO_ENGINE
++static RSA_METHOD *nb_rsa_method;
++#ifdef NEVERBLEED_ECDSA
++static EC_KEY_METHOD *nb_ecdsa_method;
++#endif
++#endif
++
+ #if OPENSSL_VERSION_NUMBER < 0x1010000fL || (defined(LIBRESSL_VERSION_NUMBER) && LIBRESSL_VERSION_NUMBER < 0x2070000fL)
+ 
+ static void RSA_get0_key(const RSA *rsa, const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)
+@@ -915,7 +924,12 @@
+     exdata->nb = nb;
+     exdata->key_index = key_index;
+ 
++#ifdef NEVERBLEED_NO_ENGINE
++    rsa = RSA_new();
++    RSA_set_method(rsa, nb_rsa_method);
++#else
+     rsa = RSA_new_method(nb->engine);
++#endif
+     RSA_set_ex_data(rsa, get_rsa_exdata_idx(), exdata);
+     if (BN_hex2bn(&e, ebuf) == 0) {
+         fprintf(stderr, "failed to parse e:%s\n", ebuf);
+@@ -1063,7 +1077,12 @@
+     exdata->nb = nb;
+     exdata->key_index = key_index;
+ 
++#ifdef NEVERBLEED_NO_ENGINE
++    ec_key = EC_KEY_new();
++    EC_KEY_set_method(ec_key, nb_ecdsa_method);
++#else
+     ec_key = EC_KEY_new_method(nb->engine);
++#endif
+     EC_KEY_set_ex_data(ec_key, get_ecdsa_exdata_idx(), exdata);
+ 
+     ec_group = EC_GROUP_new_by_curve_name(curve_name);
+@@ -2100,7 +2119,7 @@
+         ENGINE_load_qat();
+         bssl_qat_set_default_string("RSA");
+         use_offload = ENGINE_QAT_PTR_GET() != NULL;
+-#elif USE_OFFLOAD && !defined(OPENSSL_IS_BORINGSSL)
++#elif USE_OFFLOAD && !defined(OPENSSL_IS_BORINGSSL) && !defined(NEVERBLEED_NO_ENGINE)
+         ENGINE *qat = ENGINE_by_id("qatengine");
+         if (qat != NULL && ENGINE_init(qat)) {
+             if (!ENGINE_set_default_RSA(qat))
+@@ -2261,6 +2280,13 @@
+         EC_KEY_METHOD_set_sign(ecdsa_method, ecdsa_sign_proxy, NULL, NULL);
+ #endif
+ 
++#ifdef NEVERBLEED_NO_ENGINE
++        nb->engine = NULL;
++        nb_rsa_method = rsa_method;
++#ifdef NEVERBLEED_ECDSA
++        nb_ecdsa_method = ecdsa_method;
++#endif
++#else
+         if ((nb->engine = ENGINE_new()) == NULL || !ENGINE_set_id(nb->engine, "neverbleed") ||
+             !ENGINE_set_name(nb->engine, "privilege separation software engine") || !ENGINE_set_RSA(nb->engine, rsa_method)
+ #ifdef NEVERBLEED_ECDSA
+@@ -2271,6 +2297,7 @@
+             goto Fail;
+         }
+         ENGINE_add(nb->engine);
++#endif
+     }
+ #endif
+ 
+@@ -2290,10 +2317,12 @@
+     }
+     if (listen_fd != -1)
+         close(listen_fd);
++#ifndef NEVERBLEED_NO_ENGINE
+     if (nb->engine != NULL) {
+         ENGINE_free(nb->engine);
+         nb->engine = NULL;
+     }
++#endif
+     return -1;
+ }
+ 
