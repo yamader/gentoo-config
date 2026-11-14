@@ -1,1 +1,2 @@
->=dev-lang/ocaml-5.5.1 # dev-ml/ppxlib-0.37.0-r1
+>=dev-lang/go-1.27 # for kubo
+>=x11-drivers/nvidia-drivers-590 # for Pascal GPUs

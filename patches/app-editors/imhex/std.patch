@@ -14,3 +14,7 @@
 +++ b/lib/third_party/HashLibPlus/Utils/Converters.h
 @@ -0,0 +1 @@
 +#include <cstdlib>
+--- a/lib/libimhex/include/hex/api/content_registry/data_formatter.hpp
++++ b/lib/libimhex/include/hex/api/content_registry/data_formatter.hpp
+@@ -0,0 +1 @@
++#include <bit>

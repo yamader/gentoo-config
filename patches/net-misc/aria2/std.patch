@@ -1,0 +1,72 @@
+--- a/src/AbstractCommand.cc
++++ b/src/AbstractCommand.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/BitfieldMan.cc
++++ b/src/BitfieldMan.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/CookieStorage.cc
++++ b/src/CookieStorage.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/FileEntry.cc
++++ b/src/FileEntry.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/FtpConnection.cc
++++ b/src/FtpConnection.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/FtpNegotiationCommand.cc
++++ b/src/FtpNegotiationCommand.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/HttpHeader.cc
++++ b/src/HttpHeader.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/HttpRequest.cc
++++ b/src/HttpRequest.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/HttpResponse.cc
++++ b/src/HttpResponse.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/InitiateConnectionCommand.cc
++++ b/src/InitiateConnectionCommand.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/Netrc.cc
++++ b/src/Netrc.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/NsCookieParser.cc
++++ b/src/NsCookieParser.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/OptionParser.cc
++++ b/src/OptionParser.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/RpcMethodImpl.h
++++ b/src/RpcMethodImpl.h
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/SocketCore.cc
++++ b/src/SocketCore.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/UriListParser.cc
++++ b/src/UriListParser.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/json.cc
++++ b/src/json.cc
+@@ -0,0 +1 @@
++#include <iterator>
+--- a/src/paramed_string.h
++++ b/src/paramed_string.h
+@@ -0,0 +1 @@
++#include <iterator>

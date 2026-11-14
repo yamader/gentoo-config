@@ -1,0 +1,12 @@
+--- a/lib/external/pattern_language/lib/include/pl/core/errors/error.hpp
++++ b/lib/external/pattern_language/lib/include/pl/core/errors/error.hpp
+@@ -0,0 +1 @@
++#include <fmt/format.h>
+--- a/lib/external/disassembler/lib/source/spec/opcode.cpp
++++ b/lib/external/disassembler/lib/source/spec/opcode.cpp
+@@ -0,0 +1 @@
++#include <fmt/format.h>
+--- a/lib/libimhex/include/hex/api/localization_manager.hpp
++++ b/lib/libimhex/include/hex/api/localization_manager.hpp
+@@ -0,0 +1 @@
++#include <fmt/format.h>
