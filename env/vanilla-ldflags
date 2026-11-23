@@ -1,2 +1,0 @@
-# cf. gentoo:default/linux/amd64/23.0/make.defaults
-LDFLAGS="-Wl,-O2 -Wl,--as-needed -Wl,-z,pack-relative-relocs"
