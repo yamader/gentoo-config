@@ -1,0 +1,20 @@
+--- a/src/framework/cmake/MuseCreateModule.cmake
++++ b/src/framework/cmake/MuseCreateModule.cmake
+@@ -208,4 +208,17 @@
+         # don't seem to have this problem.
+         add_dependencies(${target_name}_qmltyperegistration ${target_name})
+     endif()
++
++    # Qt >= 6.12 qmlcachegen emits unqualified names (Type, Lookup, ...) under
++    # `using namespace QQmlPrivate::AOTLookupValidation`, which clash with
++    # `using namespace muse::...` in unity builds. Keep generated qmlcache out of unity.
++    cmake_language(EVAL CODE "cmake_language(DEFER CALL muse_skip_unity_for_qmlcache [[${target_name}]])")
++endfunction()
++
++function(muse_skip_unity_for_qmlcache target_name)
++    get_target_property(srcs ${target_name} SOURCES)
++    list(FILTER srcs INCLUDE REGEX "/\\.rcc/qmlcache/")
++    if (srcs)
++        set_source_files_properties(${srcs} PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
++    endif()
+ endfunction()

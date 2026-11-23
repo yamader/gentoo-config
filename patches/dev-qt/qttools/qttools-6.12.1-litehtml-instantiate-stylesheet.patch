@@ -1,0 +1,11 @@
+Explicitly instantiate parse_css_stylesheet<string>; document.cpp uses it but
+only sees the declaration, which breaks linking without unity build.
+--- a/src/assistant/qlitehtml/src/3rdparty/litehtml/src/stylesheet.cpp
++++ b/src/assistant/qlitehtml/src/3rdparty/litehtml/src/stylesheet.cpp
+@@ -140,4 +140,6 @@
+ 	);
+ }
+ 
++template void css::parse_css_stylesheet(const string&, string, document::ptr, media_query_list_list::ptr, bool);
++
+ } // namespace litehtml
