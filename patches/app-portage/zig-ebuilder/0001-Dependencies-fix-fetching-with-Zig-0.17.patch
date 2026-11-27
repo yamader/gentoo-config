@@ -1,0 +1,161 @@
+From 6732cefa199526832be7d8dddbc902a80f912b62 Mon Sep 17 00:00:00 2001
+From: Daichi Yamamoto <dev@dyama.net>
+Date: Thu, 26 Nov 2026 13:10:16 +0900
+Subject: [PATCH] Dependencies: fix fetching with Zig 0.17
+
+Zig 0.17 "zig fetch" no longer unpacks packages into "zig-pkg/" in
+current directory, it only stores "p/<hash>.tar.gz" in global cache
+(Zig 0.16 does both). Also "--global-cache-dir" was removed.
+
+* Point "ZIG_GLOBAL_CACHE_DIR" at our dependencies storage for 0.16+,
+  and unpack "p/<hash>.tar.gz" into "p/<hash>/" from there instead of
+  copying from "zig-pkg/". Unpack via temporary directory, and reuse
+  already unpacked package: it can be in use as cwd for nested fetch.
+* Check exit code of "zig fetch" instead of non-empty stderr, Zig 0.17
+  warns about failing to delete temporary directory on success when
+  fetching plain tarballs.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ src/Dependencies.zig | 79 ++++++++++++++++++++++++--------------------
+ src/ZigProcess.zig   |  9 ++++-
+ 2 files changed, 51 insertions(+), 37 deletions(-)
+
+diff --git a/src/Dependencies.zig b/src/Dependencies.zig
+index 1d7398a..c1b4bb6 100644
+--- a/src/Dependencies.zig
++++ b/src/Dependencies.zig
+@@ -105,16 +105,25 @@ pub fn collect(
+                         arena.free(result_of_fetch.stderr);
+                     }
+ 
+-                    if (result_of_fetch.stderr.len != 0) {
++                    // Zig 0.17 prints harmless warnings to stderr on success,
++                    // so check exit code instead.
++                    const fetch_ok = switch (result_of_fetch.term) {
++                        .Exited => |code| code == 0,
++                        else => false,
++                    };
++                    if (!fetch_ok) {
+                         file_events.err(@src(), "Error when fetching dependency \"{s}\". Details are in DEBUG.", .{key});
+                         file_events.debug(@src(), "{s}", .{result_of_fetch.stderr});
+                         return error.FetchFailed;
+                     }
++                    if (result_of_fetch.stderr.len != 0)
++                        file_events.warn(@src(), "zig fetch: {s}", .{std.mem.trim(u8, result_of_fetch.stderr, &std.ascii.whitespace)});
+ 
+                     const hash = std.mem.trim(u8, result_of_fetch.stdout, &std.ascii.whitespace);
+ 
+-                    // Zig 0.16+: folder packages land in cwd/zig-pkg/<hash>/.
+-                    // Copy them into generator_setup.packages (<cache>/deps/p/<hash>/)
++                    // Zig 0.16+: global cache stores packages as p/<hash>.tar.gz,
++                    // and Zig 0.17 no longer unpacks them into cwd/zig-pkg/<hash>/.
++                    // Unpack into generator_setup.packages (<cache>/deps/p/<hash>/)
+                     // so the rest of the code can find them in one consistent place.
+                     const is_0_16_or_later: bool = switch (zig_process.version.kind) {
+                         .live => true,
+@@ -122,24 +131,39 @@ pub fn collect(
+                             .{ .major = 0, .minor = 16, .patch = 0 },
+                         ).compare(.gte),
+                     };
+-                    if (is_0_16_or_later) {
+-                        var zig_pkg_dir = cwd.dir.openDir("zig-pkg", .{}) catch |err| {
+-                            file_events.err(@src(), "zig-pkg dir not found after fetch (expected): {s}", .{@errorName(err)});
+-                            return error.FetchFailed;
+-                        };
+-                        defer zig_pkg_dir.close();
+-
+-                        var src_pkg = zig_pkg_dir.openDir(hash, .{ .iterate = true }) catch |err| {
+-                            file_events.err(@src(), "Package dir zig-pkg/{s}/ not found: {s}", .{ hash, @errorName(err) });
++                    if (is_0_16_or_later) unpack: {
++                        const packages_dir = generator_setup.packages.dir;
++
++                        // Content-addressed, so reuse if already unpacked.
++                        // Don't replace it: it might be opened as `cwd` for another fetch.
++                        if (packages_dir.access(hash, .{})) |_| {
++                            break :unpack;
++                        } else |err| switch (err) {
++                            error.FileNotFound => {},
++                            else => |e| return e,
++                        }
++
++                        const tarball_name = try std.fmt.allocPrint(arena, "{s}.tar.gz", .{hash});
++                        const tarball = packages_dir.openFile(tarball_name, .{}) catch |err| {
++                            file_events.err(@src(), "Package tarball \"{s}\" not found after fetch: {s}", .{ tarball_name, @errorName(err) });
+                             return error.FetchFailed;
+                         };
+-                        defer src_pkg.close();
+-
+-                        try generator_setup.packages.dir.makePath(hash);
+-                        var dst_pkg = try generator_setup.packages.dir.openDir(hash, .{});
+-                        defer dst_pkg.close();
+-
+-                        try copyDir(arena, src_pkg, dst_pkg);
++                        defer tarball.close();
++
++                        // Unpack to temporary dir and rename, so that interrupted
++                        // run does not leave half-unpacked package behind.
++                        const tmp_name = try std.fmt.allocPrint(arena, "{s}.tmp", .{hash});
++                        try packages_dir.deleteTree(tmp_name);
++                        {
++                            var tmp_dir = try packages_dir.makeOpenPath(tmp_name, .{});
++                            defer tmp_dir.close();
++
++                            var buffered = std.io.bufferedReader(tarball.reader());
++                            var gzip = std.compress.gzip.decompressor(buffered.reader());
++                            // Tarball contains single top-level "<hash>/" directory.
++                            try std.tar.pipeToFileSystem(tmp_dir, gzip.reader(), .{ .strip_components = 1 });
++                        }
++                        try packages_dir.rename(tmp_name, hash);
+                     }
+ 
+                     all_paths.appendAssumeCapacity(.{
+@@ -362,20 +386,3 @@ pub fn pack_git_commits_to_tarball_tarball(
+     events.warn(@src(), "Compressing all into tarball-tarball...", .{});
+     try std.compress.gzip.compress(tar_reader, writer, .{ .level = compression_level });
+ }
+-
+-fn copyDir(allocator: std.mem.Allocator, src: std.fs.Dir, dst: std.fs.Dir) !void {
+-    var walker = try src.walk(allocator);
+-    defer walker.deinit();
+-    while (try walker.next()) |entry| {
+-        switch (entry.kind) {
+-            .directory => try dst.makePath(entry.path),
+-            .file => {
+-                // makePath for parent in case walker visits file before dir
+-                if (std.fs.path.dirname(entry.path)) |parent|
+-                    try dst.makePath(parent);
+-                try src.copyFile(entry.path, dst, entry.path, .{});
+-            },
+-            else => {},
+-        }
+-    }
+-}
+diff --git a/src/ZigProcess.zig b/src/ZigProcess.zig
+index 49b9dca..83faa61 100644
+--- a/src/ZigProcess.zig
++++ b/src/ZigProcess.zig
+@@ -167,12 +167,19 @@ pub fn fetch(
+         .none => @panic("unreachable"),
+     }
+ 
++    // Zig 0.17 removed "--global-cache-dir", use env variable instead.
++    var env_map: std.process.EnvMap = .init(allocator);
++    defer env_map.deinit();
++    var it = self.env_map.iterator();
++    while (it.next()) |entry| try env_map.put(entry.key_ptr.*, entry.value_ptr.*);
++    if (is_0_16_or_later) try env_map.put("ZIG_GLOBAL_CACHE_DIR", args.storage_loc.string);
++
+     events.debug(@src(), "Running command: cd \"{!s}\" && {s}", .{ cwd.string, argv.items });
+     return try std.process.Child.run(.{
+         .allocator = allocator,
+         .argv = argv.items,
+         .cwd_dir = cwd.dir,
+-        .env_map = self.env_map,
++        .env_map = &env_map,
+         .max_output_bytes = 1 * 1024,
+     });
+ }
+-- 
+2.56.1
+

@@ -1,0 +1,267 @@
+From 878850f94dab7b5efb9c7722d013969a02fe5ce1 Mon Sep 17 00:00:00 2001
+From: Daichi Yamamoto <dev@dyama.net>
+Date: Thu, 26 Nov 2026 13:25:35 +0900
+Subject: [PATCH 2/2] Support Zig 0.17.1 build system
+
+Zig 0.17 removed custom build runners ("--build-runner"): "build.zig"
+is now run by separate "configurer" process, which serializes resulting
+configuration for "maker" process.
+
+For 0.17+ releases, get path to that configuration with
+"zig build --print-configuration-path", and pass it to new
+"0.17.1.zig" program (run with "zig run") which reads it using
+"std.Build.Configuration" and sends the same report as build runners.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ README.md                      |   2 +-
+ share/build_runners/0.17.1.zig | 153 +++++++++++++++++++++++++++++++++
+ src/ZigProcess.zig             |  45 +++++++++-
+ 3 files changed, 197 insertions(+), 3 deletions(-)
+ create mode 100644 share/build_runners/0.17.1.zig
+
+diff --git a/README.md b/README.md
+index 2959aba..9911303 100644
+--- a/README.md
++++ b/README.md
+@@ -47,7 +47,7 @@ Supported formats are ebuilds for Gentoo-based distros with
+ 
+ For compilation you need Zig 0.14 .
+ 
+-For using at runtime you can use Zig 0.14, 0.15, 0.16 or latest master commit
++For using at runtime you can use Zig 0.14, 0.15, 0.16, 0.17.1 or latest master commit
+ (tested with `0.17.0-dev.305+bdfbf432d`).
+ 
+ ```console
+diff --git a/share/build_runners/0.17.1.zig b/share/build_runners/0.17.1.zig
+new file mode 100644
+index 0000000..6085ac2
+--- /dev/null
++++ b/share/build_runners/0.17.1.zig
+@@ -0,0 +1,153 @@
++// SPDX-FileCopyrightText: 2026 Daichi Yamamoto
++//
++// SPDX-License-Identifier: EUPL-1.2
++
++//! Zig 0.17 does not support custom build runners anymore: "build.zig" is run
++//! by separate "configurer" process which serializes resulting configuration.
++//! This program reads that configuration (path is passed as an argument,
++//! see "zig build --print-configuration-path") and sends report to zig-ebuilder.
++
++const std = @import("std");
++const Configuration = std.Build.Configuration;
++
++const Report = @import("Report.zig");
++
++pub fn main(init: std.process.Init) !void {
++    const arena = init.arena.allocator();
++    const io = init.io;
++
++    const args = try init.minimal.args.toSlice(arena);
++    if (args.len != 2) std.process.fatal("usage: {s} <configuration path>", .{args[0]});
++
++    const c: Configuration = c: {
++        const file = try std.Io.Dir.cwd().openFile(io, args[1], .{});
++        defer file.close(io);
++        break :c try .loadFile(arena, io, file);
++    };
++
++    // Like build runner: only steps needed for default step.
++    var steps: std.array_hash_map.Auto(Configuration.Step.Index, void) = .empty;
++    try steps.put(arena, c.default_step, {});
++    var steps_i: usize = 0;
++    while (steps_i < steps.count()) : (steps_i += 1) {
++        for (steps.keys()[steps_i].ptr(&c).deps.slice(&c)) |dep|
++            try steps.put(arena, dep, {});
++    }
++
++    var system_libraries: std.array_hash_map.String(std.ArrayList([]const u8)) = .empty;
++    var used_packages: std.array_hash_map.Auto(Configuration.Package.Index, void) = .empty;
++
++    for (c.steps) |step| try used_packages.put(arena, step.owner, {});
++
++    for (steps.keys()) |step_index| {
++        const compile = switch (step_index.ptr(&c).extended.get(c.extra)) {
++            .compile => |compile| compile,
++            else => continue,
++        };
++
++        // Root module and all modules imported by it, transitively.
++        var modules: std.array_hash_map.Auto(Configuration.Module.Index, []const u8) = .empty;
++        try modules.put(arena, compile.root_module, "");
++        var modules_i: usize = 0;
++        while (modules_i < modules.count()) : (modules_i += 1) {
++            const module = modules.keys()[modules_i].get(&c);
++            try used_packages.put(arena, module.owner, {});
++
++            const imports = module.import_table.get(&c).imports.mal;
++            for (imports.items(.name), imports.items(.module)) |import_name, import|
++                try modules.put(arena, import, import_name.slice(&c));
++
++            for (0..module.link_objects.len) |link_object_i| switch (module.link_objects.get(c.extra, link_object_i)) {
++                .system_lib => |system_lib| {
++                    const used_by = if (modules_i == 0)
++                        try std.fmt.allocPrint(arena, "(artifact) {s}", .{compile.root_name.slice(&c)})
++                    else
++                        try std.fmt.allocPrint(arena, "(module) {s}", .{modules.values()[modules_i]});
++
++                    const gop = try system_libraries.getOrPut(arena, system_lib.get(&c).name.slice(&c));
++                    if (!gop.found_existing) gop.value_ptr.* = .empty;
++                    try gop.value_ptr.append(arena, used_by);
++                },
++                .static_path,
++                .other_step,
++                .assembly_file,
++                .c_source_file,
++                .c_source_files,
++                .win32_resource_file,
++                => {},
++            };
++        }
++    }
++
++    var system_libraries_list: std.ArrayList(Report.SystemLibrary) = try .initCapacity(arena, system_libraries.count());
++    for (system_libraries.keys(), system_libraries.values()) |name, used_by|
++        system_libraries_list.appendAssumeCapacity(.{ .name = name, .used_by = used_by.items });
++    std.mem.sort(Report.SystemLibrary, system_libraries_list.items, {}, struct {
++        fn lessThan(_: void, lhs: Report.SystemLibrary, rhs: Report.SystemLibrary) bool {
++            return std.mem.order(u8, lhs.name, rhs.name) == .lt;
++        }
++    }.lessThan);
++
++    var system_integrations: std.ArrayList(Report.SystemIntegration) = try .initCapacity(arena, c.system_integrations.len);
++    for (c.system_integrations) |system_integration| system_integrations.appendAssumeCapacity(.{
++        .name = system_integration.name.slice(&c),
++        .enabled = system_integration.status == .enabled,
++    });
++    std.mem.sort(Report.SystemIntegration, system_integrations.items, {}, struct {
++        // Enabled first, then by name.
++        fn lessThan(_: void, lhs: Report.SystemIntegration, rhs: Report.SystemIntegration) bool {
++            if (lhs.enabled != rhs.enabled) return lhs.enabled;
++            return std.mem.order(u8, lhs.name, rhs.name) == .lt;
++        }
++    }.lessThan);
++
++    var user_options: std.ArrayList(Report.UserOption) = try .initCapacity(arena, c.available_options.len);
++    for (c.available_options) |option| user_options.appendAssumeCapacity(.{
++        .name = option.name.slice(&c),
++        .description = option.description.slice(&c),
++        .type = switch (option.type) {
++            .@"enum" => "enum",
++            .enum_list => "list of enums",
++            .bool => "bool",
++            .int => "int",
++            .float => "float",
++            .lazy_path => "LazyPath",
++            .lazy_path_list => "list of LazyPath",
++            .string => "string",
++            .list => "list of strings",
++            .build_id => "build ID",
++        },
++        .values = if (option.enum_options.slice(&c)) |enum_options| values: {
++            const values = try arena.alloc([]const u8, enum_options.len);
++            for (values, enum_options) |*value, enum_option| value.* = enum_option.slice(&c);
++            break :values values;
++        } else null,
++    });
++
++    var used_dependencies_hashes: std.ArrayList([]const u8) = try .initCapacity(arena, used_packages.count());
++    for (used_packages.keys()) |package_index| {
++        const package = package_index.get(&c) orelse continue; // root
++        used_dependencies_hashes.appendAssumeCapacity(package.hash.slice(&c));
++    }
++
++    const report: Report = .{
++        .system_libraries = system_libraries_list.items,
++        .system_integrations = system_integrations.items,
++        .user_options = user_options.items,
++        .used_dependencies_hashes = used_dependencies_hashes.items,
++    };
++
++    const env_var = init.environ_map.get("ZIG_EBUILDER_REPORT_LISTEN_PORT") orelse
++        std.process.fatal("listen port for report client is not defined: ZIG_EBUILDER_REPORT_LISTEN_PORT not set", .{});
++    const port = std.fmt.parseInt(u16, env_var, 10) catch |err|
++        std.process.fatal("error when parsing listen port for report client: {t}", .{err});
++
++    const listen_address: std.Io.net.IpAddress = .{ .ip6 = .loopback(port) };
++    const conn = try listen_address.connect(io, .{ .protocol = .tcp, .mode = .stream });
++    defer conn.close(io);
++
++    var conn_buffer: [1024]u8 = undefined;
++    var conn_writer = conn.writer(io, &conn_buffer);
++    try conn_writer.interface.print("{f}", .{std.json.fmt(report, .{ .whitespace = .minified })});
++    try conn_writer.interface.flush();
++}
+diff --git a/src/ZigProcess.zig b/src/ZigProcess.zig
+index 83faa61..b90fd18 100644
+--- a/src/ZigProcess.zig
++++ b/src/ZigProcess.zig
+@@ -195,6 +195,16 @@ pub fn build(
+     },
+     events: Logger,
+ ) std.process.Child.RunError!std.process.Child.RunResult {
++    // Zig 0.17 removed "--build-runner": "build.zig" is run by separate
++    // "configurer" process instead. Let it serialize configuration,
++    // and pass it to our "build runner" which reads it and sends report.
++    const is_0_17_or_later: bool = switch (self.version.kind) {
++        .live => false, // "live.zig" is still synced with old build runner.
++        .release => self.version.sem_ver.order(
++            .{ .major = 0, .minor = 17, .patch = 0 },
++        ).compare(.gte),
++    };
++
+     var argv: std.ArrayListUnmanaged([]const u8) = .empty;
+     defer argv.deinit(allocator);
+     try argv.appendSlice(allocator, &.{
+@@ -202,8 +212,12 @@ pub fn build(
+         "build",
+         "--build-file",
+         project_setup.build_zig.string,
+-        "--build-runner",
+-        args.build_runner_path,
++    });
++    if (is_0_17_or_later)
++        try argv.append(allocator, "--print-configuration-path")
++    else
++        try argv.appendSlice(allocator, &.{ "--build-runner", args.build_runner_path });
++    try argv.appendSlice(allocator, &.{
+         "--system",
+         args.packages_loc.string,
+         // TODO is it truly needed? sorting JSON values works for now
+@@ -216,6 +230,33 @@ pub fn build(
+     if (args.additional.len > 0)
+         events.info(@src(), "Additional args: {s}", .{args.additional});
+ 
++    if (is_0_17_or_later) {
++        const result_of_configure = try std.process.Child.run(.{
++            .allocator = allocator,
++            .argv = argv.items,
++            .cwd_dir = project_setup.root.dir,
++            .env_map = self.env_map,
++            .max_output_bytes = 1 * 1024 * 1024,
++        });
++        switch (result_of_configure.term) {
++            .Exited => |code| if (code != 0) return result_of_configure,
++            .Signal, .Stopped, .Unknown => return result_of_configure,
++        }
++        defer {
++            allocator.free(result_of_configure.stderr);
++            allocator.free(result_of_configure.stdout);
++        }
++
++        const configuration_path = std.mem.trim(u8, result_of_configure.stdout, &std.ascii.whitespace);
++        return try std.process.Child.run(.{
++            .allocator = allocator,
++            .argv = &.{ self.exe, "run", args.build_runner_path, "--", configuration_path },
++            .cwd_dir = project_setup.root.dir,
++            .env_map = self.env_map,
++            .max_output_bytes = 1 * 1024 * 1024,
++        });
++    }
++
+     return try std.process.Child.run(.{
+         .allocator = allocator,
+         .argv = argv.items,
+-- 
+2.56.1
+
