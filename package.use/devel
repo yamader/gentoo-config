@@ -1,19 +1,18 @@
-*/* DLANG_SINGLE_TARGET: ldc2-1_40
+*/* DLANG_SINGLE_TARGET: ldc2-1_42
 */gcc -lto -pgo # save the time
-*/rust* rust-src rustfmt
 
 dev-debug/gdb multitarget
-dev-embedded/esp-idf riscv32
 dev-lang/dmd -selfhost static-libs tools
-dev-lang/ldc2 static-libs ABI_X86: 32
 dev-lang/php cgi cli exif ffi fpm mysqli postgres sqlite threads zip
 dev-lang/ruby jit
-dev-lang/rust LLVM_TARGETS: AArch64 WebAssembly
-dev-lang/rust rust-analyzer wasm
+dev-lang/rust rust-analyzer rustfmt wasm
 dev-lang/swift libcxx
-llvm-core/clang LLVM_TARGETS: Xtensa
-llvm-core/llvm LLVM_TARGETS: Xtensa
-llvm-runtimes/libunwind -debug
-net-libs/nodejs corepack inspector npm
+net-libs/nodejs inspector npm
 sys-apps/portage gentoo-dev
 sys-devel/gcc d
+
+dev-embedded/esp-idf riscv32
+dev-lang/ldc2 static-libs ABI_X86: 32
+dev-lang/rust LLVM_TARGETS: AArch64 WebAssembly
+llvm-core/clang LLVM_TARGETS: Xtensa
+llvm-core/llvm LLVM_TARGETS: Xtensa

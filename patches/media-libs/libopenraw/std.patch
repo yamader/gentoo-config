@@ -1,0 +1,8 @@
+--- a/lib/jfifcontainer.cpp
++++ b/lib/jfifcontainer.cpp
+@@ -0,0 +1 @@
++#include <cstdio>
+--- a/lib/ciff/ciffifd.cpp
++++ b/lib/ciff/ciffifd.cpp
+@@ -0,0 +1 @@
++#include <ctime>

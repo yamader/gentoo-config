@@ -1,0 +1,15 @@
+--- a/deps/v8/src/codegen/code-stub-assembler.cc	2026-11-27 16:12:28.326437141 +0900
++++ b/deps/v8/src/codegen/code-stub-assembler.cc	2026-11-27 16:12:28.328504793 +0900
+@@ -14996,6 +14996,12 @@
+     TNode<RawPtrT> start_index, TNode<RawPtrT> end_index,
+     const FastLoopBody<RawPtrT>& body, int increment,
+     LoopUnrollingMode unrolling_mode, IndexAdvanceMode advance_mode);
++template V8_EXPORT_PRIVATE void CodeStubAssembler::BuildFastLoop<IntPtrT>(
++    const VariableList& vars, TVariable<IntPtrT>& var_index,
++    TNode<IntPtrT> start_index, TNode<IntPtrT> end_index,
++    const FastLoopBody<IntPtrT>& body, TNode<IntPtrT> increment,
++    LoopUnrollingMode unrolling_mode, IndexAdvanceMode advance_mode,
++    IndexAdvanceDirection advance_direction);
+ 
+ template <typename TIndex>
+ void CodeStubAssembler::BuildFastArrayForEach(

@@ -1,10 +1,11 @@
 */* LUA_TARGETS: luajit
-*/* PYTHON_TARGETS: python3_15t python3_14t
+*/* PYTHON_TARGETS: python3_16t python3_15t python3_14t
 
 app-emulation/wine-* -abi_x86_32 wow64
 dev-lang/python -bluetooth
 llvm-core/llvm binutils-plugin # spidermonkey-115: LLVMgold.so: No such file or directory
 llvm-runtimes/clang-runtime sanitize # fix PGO
+llvm-runtimes/libunwind -debug # libunwind: __unw_add_dynamic_fde: bad fde: FDE is really a CIE
 media-video/pipewire pipewire-alsa sound-server
 net-misc/networkmanager iwd
 sys-apps/fwupd logitech nvme synaptics uefi
@@ -12,9 +13,10 @@ sys-apps/openrc sysv-utils -sysvinit
 sys-apps/systemd cryptsetup
 sys-auth/pambase -passwdqc
 sys-boot/grub GRUB_PLATFORMS: efi-64 # ieee1275 uboot
+
 sys-firmware/intel-microcode initramfs
 sys-kernel/*-kernel-bin modules-compress
 sys-kernel/cachyos-kernel -hz_ticks_1000 hz_ticks_250
 sys-kernel/cachyos-sources -hz-ticks-1000 hz-ticks-250
-sys-kernel/linux-firmware compress-xz
+sys-kernel/linux-firmware compress-zstd
 x11-drivers/nvidia-drivers modules-compress

@@ -1,0 +1,6 @@
+*/*::gentoo-zh
+
+>=x11-drivers/nvidia-drivers-590 # for Pascal GPUs
+
+# pin
+#>sys-kernel/cachyos-sources-7.3.6

@@ -5,7 +5,7 @@ app-editors/neovim **
 app-portage/zig-ebuilder **
 
 # devel
-<dev-lang/python-0.3.15.9999:3.15t **
+<dev-lang/python-0.3.16.9999:3.16t **
 <sys-devel/gcc-17.0.9999:17 **
 
 # llvm binaries

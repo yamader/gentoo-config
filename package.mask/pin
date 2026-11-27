@@ -1,2 +1,0 @@
->=dev-lang/go-1.27 # for kubo
->=x11-drivers/nvidia-drivers-590 # for Pascal GPUs
